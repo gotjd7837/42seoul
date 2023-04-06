@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 20:04:47 by haekang           #+#    #+#             */
-/*   Updated: 2023/04/06 21:56:42 by haekang          ###   ########.fr       */
+/*   Updated: 2023/04/07 01:34:10 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	t_list	*sibal;
 
 	new_lst = ft_lstnew((*f)(lst->content));
-	if (new_lst != NULL)
+	if (new_lst == NULL)
 		return (NULL);
 	sibal = new_lst;
 	while (lst != NULL)
@@ -26,13 +26,11 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 		lst = lst->next;
 		if (lst != NULL)
 		{
-			ft_lstadd_back(&new_lst, sibal);
+			ft_lstadd_back(&new_lst, ft_lstnew((*f)(lst->content)));
 			sibal = sibal->next;
 		}
 	}
 	sibal->next = NULL;
-
-	ft_lstclear(&lst, (*del));
-
+	ft_lstclear(&lst, del);
 	return (new_lst);
 }
