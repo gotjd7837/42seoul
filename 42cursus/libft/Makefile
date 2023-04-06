@@ -31,7 +31,7 @@ SRCS=	ft_bzero.c \
 		ft_striteri.c \
 		ft_putchar_fd.c \
 		ft_putstr_fd.c \
-		ft_putendl_fd \
+		ft_putendl_fd.c \
 		ft_putnbr_fd.c
 SRCS_B=	ft_lstnew.c \
 		ft_lstadd_front.c \
@@ -49,6 +49,7 @@ $(NAME) : $(OBJS)
 	ar rcs $@ $^
 
 bonus : $(OBJS) $(OBJS_B)
+	rm -f $(NAME)
 	ar rcs $(NAME) $^
 
 %.o : %.c
