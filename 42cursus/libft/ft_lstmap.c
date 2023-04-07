@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 20:04:47 by haekang           #+#    #+#             */
-/*   Updated: 2023/04/07 01:34:10 by haekang          ###   ########.fr       */
+/*   Updated: 2023/04/07 16:35:06 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,28 @@
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*new_lst;
-	t_list	*sibal;
+	t_list	*head;
+	t_list	*new_node;
+	void	*content_p;
 
-	new_lst = ft_lstnew((*f)(lst->content));
-	if (new_lst == NULL)
+	if (lst == NULL)
 		return (NULL);
-	sibal = new_lst;
+	head = NULL;
 	while (lst != NULL)
 	{
-		lst = lst->next;
-		if (lst != NULL)
+		content_p = (*f)(lst->content);
+		new_node = ft_lstnew(content_p);
+		if (new_node == NULL)
 		{
-			ft_lstadd_back(&new_lst, ft_lstnew((*f)(lst->content)));
-			sibal = sibal->next;
+			ft_lstclear(&head, (*del));
+			(*del)(content_p);
+			return (NULL);
+		}
+		else
+		{
+			ft_lstadd_back(&head, new_node);
+			lst = lst->next;
 		}
 	}
-	sibal->next = NULL;
-	ft_lstclear(&lst, del);
-	return (new_lst);
+	return (head);
 }

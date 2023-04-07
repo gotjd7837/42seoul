@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:54:07 by haekang           #+#    #+#             */
-/*   Updated: 2023/04/06 21:56:45 by haekang          ###   ########.fr       */
+/*   Updated: 2023/04/07 16:33:32 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,18 @@
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
 	t_list	*node;
-	t_list	*n_node;
+	t_list	*next;
 
 	if (lst == NULL || *lst == NULL)
 		return ;
 	node = *lst;
-	n_node = node->next;
+	next = node->next;
 	while (node != NULL)
 	{
-		(*del)(node->content);
-		free(node);
-		node = n_node;
+		ft_lstdelone(node, (*del));
+		node = next;
 		if (node != NULL)
-			n_node = node->next;
+			next = node->next;
 	}
 	*lst = NULL;
 }
