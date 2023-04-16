@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 05:38:50 by haekang           #+#    #+#             */
-/*   Updated: 2023/04/13 19:22:40 by haekang          ###   ########.fr       */
+/*   Updated: 2023/04/16 15:09:53 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,57 @@ char	*ft_strchr(const char *s, int c)
 	if ((unsigned char)c == '\0')
 		return ((char *)s);
 	return (NULL);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	size_t	i;
+	char	*arr;
+
+	i = 0;
+	if (ft_strlen(s) < len + start)
+		len = ft_strlen(s) - start;
+	if (ft_strlen(s) > start)
+	{
+		arr = (char *)malloc(sizeof(char) * (len + 1));
+		if (arr == NULL)
+			return (NULL);
+		while (s[start + i] && i < len)
+		{
+			arr[i] = s[start + i];
+			i++;
+		}
+	}
+	else
+	{
+		arr = (char *)malloc(sizeof(char));
+		if (arr == NULL)
+			return (NULL);
+	}
+	arr[i] = '\0';
+	return (arr);
+}
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	void	*arr;
+
+	arr = malloc(count * size);
+	if (arr == NULL)
+		return (NULL);
+	ft_memset(arr, 0, count * size);
+	return (arr);
+}
+
+void	*ft_memset(void *b, int c, size_t len)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < len)
+	{
+		*((char *)b + i) = (unsigned char)c;
+		i++;
+	}
+	return (b);
 }

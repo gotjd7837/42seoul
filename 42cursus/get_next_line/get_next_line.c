@@ -6,141 +6,226 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 05:38:54 by haekang           #+#    #+#             */
-/*   Updated: 2023/04/13 20:09:03 by haekang          ###   ########.fr       */
+/*   Updated: 2023/04/16 16:15:00 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-#include <stdio.h>
 
-char	*ft_strjoin(char const *s1, char const *s2)
+
+// static char	*ft_free(char *buffer, char *buf)
+// {
+// 	char	*temp;
+
+// 	temp = ft_strjoin(buffer, buf);
+// 	free(buffer);
+// 	return (temp);
+// }
+
+// // delete line find
+// static char	*ft_next(char *buffer)
+// {
+// 	int		i;
+// 	int		j;
+// 	char	*line;
+
+// 	i = 0;
+// 	// find len of first line
+// 	while (buffer[i] && buffer[i] != '\n')
+// 		i++;
+// 	// if eol == \0 return NULL
+// 	if (!buffer[i])
+// 	{
+// 		free(buffer);
+// 		return (NULL);
+// 	}
+// 	// len of file - len of firstline + 1
+// 	line = ft_calloc((ft_strlen(buffer) - i + 1), sizeof(char));
+// 	i++;
+// 	j = 0;
+// 	// line == buffer
+// 	while (buffer[i])
+// 		line[j++] = buffer[i++];
+// 	free(buffer);
+// 	return (line);
+// }
+
+// // take line for return
+// static char	*ft_line(char *buffer)
+// {
+// 	char	*line;
+// 	int		i;
+
+// 	i = 0;
+// 	// if no line return NULL
+// 	if (!buffer[i])
+// 		return (NULL);
+// 	// go to the eol
+// 	while (buffer[i] && buffer[i] != '\n')
+// 		i++;
+// 	// malloc to eol
+// 	line = ft_calloc(i + 2, sizeof(char));
+// 	i = 0;
+// 	// line = buffer
+// 	while (buffer[i] && buffer[i] != '\n')
+// 	{
+// 		line[i] = buffer[i];
+// 		i++;
+// 	}
+// 	// if eol is \0 or \n, replace eol by \n
+// 	if (buffer[i] && buffer[i] == '\n')
+// 		line[i++] = '\n';
+// 	return (line);
+// }
+
+// static char	*read_file(int fd, char *res)
+// {
+// 	char	*buffer;
+// 	int		byte_read;
+
+// 	// malloc if res dont exist
+// 	if (!res)
+// 		res = ft_calloc(1, 1);
+// 	// malloc buffer
+// 	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+// 	byte_read = 1;
+// 	while (byte_read > 0)
+// 	{
+// 		// while not eof read
+// 		byte_read = read(fd, buffer, BUFFER_SIZE);
+// 		if (byte_read == -1)
+// 		{
+// 			free(buffer);
+// 			return (NULL);
+// 		}
+// 		// 0 to end for leak
+// 		buffer[byte_read] = 0;
+// 		// join and free
+// 		res = ft_free(res, buffer);
+// 		// quit if \n find
+// 		if (ft_strchr(buffer, '\n'))
+// 			break ;
+// 	}
+// 	free(buffer);
+// 	return (res);
+// }
+
+// char	*get_next_line(int fd)
+// {
+// 	static char	*buffer;
+// 	char		*line;
+
+// 	// error handling
+// 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+// 		return (NULL);
+// 	buffer = read_file(fd, buffer);
+// 	if (!buffer)
+// 		return (NULL);
+// 	line = ft_line(buffer);
+// 	buffer = ft_next(buffer);
+// 	return (line);
+// }
+
+
+
+
+
+ ///////////////////////////////////////////////////////
+
+static char *get_line(char **save)
 {
-	int		i;
-	int		j;
-	char	*arr;
+	// 조건문으로 chr \n이 검출 됐을 때 res 검출 안됐을 때 (마지막줄) 나눠서 ㄱㄱ
+	// chr로 개행의 주솟값 받아옴
+	// 주솟값의 문자를 널문자로 변환
 
-	i = ft_strlen(s1);
-	j = ft_strlen(s2);
-	arr = (char *)malloc(sizeof(char) * (i + j + 1));
-	if (arr == NULL)
-		return (NULL);
-	arr[i + j] = '\0';
-	while (--j >= 0)
-		arr[i + j] = s2[j];
-	while (--i >= 0)
-		arr[i] = s1[i];
-	return (arr);
-}
+	char *res;
+	char *tmp;
+	int len;
 
-size_t	ft_strlen(const char *str)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-char	*ft_strdup(const char *s1)
-{
-	int		i;
-	char	*str;
-
-	i = ft_strlen(s1);
-	str = (char *)malloc(sizeof(char) * (i + 1));
-	if (str == NULL)
-		return (NULL);
-	i = 0;
-	while (s1[i])
+	if (ft_strchr(*save, '\n'))
 	{
-		str[i] = s1[i];
-		i++;
+		len = (ft_strchr(*save, '\n') - *save);
+		res = ft_substr(*save, 0, (len + 1));
+		tmp = *save;
+		*save = ft_strdup(tmp + (len + 1));
+		free(tmp);
+		return (res);
 	}
-	str[i] = '\0';
-	return (str);
-}
-
-char	*ft_strchr(const char *s, int c)
-{
-	while (*s)
+	else // 개행이 없다는 것이므로 마지막줄이라는 것
 	{
-		if (*s == (unsigned char)c)
-			return ((char *)s);
-		s++;
+        res = ft_strdup(*save);
+		free(*save);
+        *save = NULL;
+		return (res);
 	}
-	if ((unsigned char)c == '\0')
-		return ((char *)s);
-	return (NULL);
+
 }
 
-
-// test
-char *get_next_line(int fd)
+static void	get_save(int fd, char **save)
 {
-    char *buffer;
-    ssize_t read_len;
-    static char *save;
-    char *i;
-    int idx;
-    char *result;
+	ssize_t	read_len;
+	char	*tmp;
+    char    *buf;
 
-    if (fd < 0 || BUFFER_SIZE < 1)
-        return (NULL);
-    buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-    if (buffer == NULL)
-        return (NULL);
-    while ((read_len = read(fd, buffer, BUFFER_SIZE)) > 0) // read할 때마다 파일 포인터가 이동해서 다음 호출에서는 파일내의 다음 데이터를 읽게됨 
-    {
-        buffer[read_len] = '\0';
-        if (save == NULL) // 처음 함수가 호출 되어 save 변수를 접근 했을 때
-            save = strdup(buffer); // 버퍼를 담아줌
-        else // 이전에 버퍼를 save에 담은적이 있으면
-            save = ft_strjoin(save, buffer); // save와 버퍼를 합쳐줌
-        if (ft_strchr(save, '\n')) // save에서 \n을 찾았을 때
-            break; // 반복 종료
-    } // 버퍼에 담아서 save에 넣어주는 반복문
-    free(buffer); // 개행문자 찾았으니 버퍼 할당해제, save에는 개행문자가 담겨있음
-    if (read_len == -1)
-    {
-        free(save);
-        return (NULL);
-    }
-    if (read_len == 0 && save == NULL)
-        return (NULL);
-    i = ft_strchr(save, '\n');
-    if (i != NULL)
-    {
-        idx = (i - save);
-        save[idx] = '\0';
-        result = ft_strdup(save);
-        free(save);
-        save = ft_strdup(i + 1);
-    }
-    else
-    {
-        result = ft_strdup(save);
-        free(save);
-        save = NULL;
-    }
-    return (result);
+    buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+    read_len = 1;
+	while (read_len > 0)
+	{
+        read_len = read(fd, buf, BUFFER_SIZE);
+		if (read_len == -1)
+		{
+			free(buf);
+			return ;
+		}
+		buf[read_len] = '\0';
+		if (*save == NULL)
+			*save = ft_strdup(buf);
+		else
+		{
+			tmp = *save;
+			*save = ft_strjoin(tmp, buf);
+			free(tmp);
+		}
+		if (ft_strchr(*save, '\n'))
+			break;
+	}
+    free(buf);
 }
 
-#include <stdio.h>
-#include <fcntl.h>
-
-int main()
+char	*get_next_line(int fd) // 호출 시 파일의 개행 전까지 출력
 {
-    int fd;
-    
-    fd = open("./test.txt", O_RDONLY);
-    printf("%s\n", get_next_line(fd));
-    printf("%s\n", get_next_line(fd));
-    printf("%s\n", get_next_line(fd));
-    printf("%s\n", get_next_line(fd));
-    printf("%s\n", get_next_line(fd));
-    
-    close(fd);
-    return (0);
+    static char	*save;
+	char	*res;
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	get_save(fd, &save); // save에 개행이 없으면, read를 해서 버퍼랑 조인해줌
+    if (!save)
+        return (NULL);
+	res = get_line(&save); // save에서 개행을 기준으로 앞을 반환, 뒤를 save로 치환한다
+	return (res);
 }
+
+// #include <stdio.h>
+// #include <fcntl.h>
+
+
+// int main()
+// {
+//     int fd;
+    
+//     fd = open("./test.txt", O_RDONLY);
+//     printf("%s\n", get_next_line(fd));
+//     printf("%s\n", get_next_line(fd));
+//     printf("%s\n", get_next_line(fd));
+//     printf("%s\n", get_next_line(fd));
+//     printf("%s\n", get_next_line(fd));
+//     printf("%s\n", get_next_line(fd));
+//     printf("%s\n", get_next_line(fd));
+//     printf("%s\n", get_next_line(fd));
+//     printf("%s\n", get_next_line(fd));
+    
+//     close(fd);
+//     return (0);
+// }
