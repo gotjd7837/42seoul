@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 05:38:54 by haekang           #+#    #+#             */
-/*   Updated: 2023/04/17 22:04:23 by haekang          ###   ########.fr       */
+/*   Updated: 2023/04/17 22:31:43 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ static char	*save_update(char *save, char *buf)
 static char	*get_next_save(char *save)
 {
 	int		i;
-	int		j;
-	char	*line;
+	char	*new_save;
 
 	i = 0;
 	while (save[i] && save[i] != '\n')
@@ -35,14 +34,9 @@ static char	*get_next_save(char *save)
 		free(save);
 		return (NULL);
 	}
-	line = (char *)malloc(sizeof(char) * ((ft_strlen(save) - i) + 1));
-	i += 1;
-	j = 0;
-	while (save[i])
-		line[j++] = save[i++];
-	line[j] = '\0';
+	new_save = ft_substr(save, i + 1, (ft_strlen(save) - (i + 1)));
 	free(save);
-	return (line);
+	return (new_save);
 }
 
 
@@ -56,20 +50,10 @@ static char	*get_line(char *save)
 		return (NULL);
 	while (save[i] && save[i] != '\n')
 		i++;
-	line = (char *)malloc(sizeof(char) * (i + 2));
-	i = 0;
-	while (save[i] && save[i] != '\n')
-	{
-		line[i] = save[i];
-		i++;
-	}
-	if (save[i] == '\0')
-		line[i] = '\0';
-	else if (save[i] == '\n')
-	{
-		line[i] = '\n';
-		line[i + 1] = '\0';
-	}
+	if (!save[i])
+		line = ft_strdup(save);
+	else
+		line = ft_substr(save, 0, i + 1);
 	return (line);
 }
 
@@ -86,6 +70,7 @@ static char	*get_save(int fd, char *save)
 		if (byte_read < 0)
 		{
 			free(buf);
+			free(save);
 			return (NULL);
 		}
 		buf[byte_read] = '\0';
