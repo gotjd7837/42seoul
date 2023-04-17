@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 05:38:50 by haekang           #+#    #+#             */
-/*   Updated: 2023/04/16 15:09:53 by haekang          ###   ########.fr       */
+/*   Updated: 2023/04/17 21:50:00 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,17 +99,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 			return (NULL);
 	}
 	arr[i] = '\0';
-	return (arr);
-}
-
-void	*ft_calloc(size_t count, size_t size)
-{
-	void	*arr;
-
-	arr = malloc(count * size);
-	if (arr == NULL)
-		return (NULL);
-	ft_memset(arr, 0, count * size);
 	return (arr);
 }
 
