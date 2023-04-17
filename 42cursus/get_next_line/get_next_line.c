@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 05:38:54 by haekang           #+#    #+#             */
-/*   Updated: 2023/04/17 22:31:43 by haekang          ###   ########.fr       */
+/*   Updated: 2023/04/18 02:36:52 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,16 @@ static char	*save_update(char *save, char *buf)
 {
 	char	*tmp;
 
-	tmp = ft_strjoin(save, buf);
-	free(save);
-	return (tmp);
+	tmp = save;
+	save = ft_strjoin(save, buf);
+	free(tmp);
+	return (save);
 }
 
 static char	*get_next_save(char *save)
 {
-	int		i;
 	char	*new_save;
+	int		i;
 
 	i = 0;
 	while (save[i] && save[i] != '\n')
@@ -39,7 +40,6 @@ static char	*get_next_save(char *save)
 	return (new_save);
 }
 
-
 static char	*get_line(char *save)
 {
 	char	*line;
@@ -53,31 +53,33 @@ static char	*get_line(char *save)
 	if (!save[i])
 		line = ft_strdup(save);
 	else
-		line = ft_substr(save, 0, i + 1);
+		line = ft_substr(save, 0, (i + 1));
 	return (line);
 }
 
 static char	*get_save(int fd, char *save)
 {
 	char	*buf;
-	int		byte_read;
+	int		read_len;
 
 	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	byte_read = 1;
-	while (byte_read > 0)
+	if (!buf)
+		return (NULL);
+	read_len = 1;
+	while (read_len > 0)
 	{
-		byte_read = read(fd, buf, BUFFER_SIZE);
-		if (byte_read < 0)
+		read_len = read(fd, buf, BUFFER_SIZE);
+		if (read_len < 0)
 		{
 			free(buf);
 			free(save);
 			return (NULL);
 		}
-		buf[byte_read] = '\0';
+		buf[read_len] = '\0';
 		if (!save)
 			save = ft_strdup("");
 		save = save_update(save, buf);
-		if (ft_strchr(buf, '\n'))
+		if (ft_strchr(save, '\n'))
 			break ;
 	}
 	free(buf);
