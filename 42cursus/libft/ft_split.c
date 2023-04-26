@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 02:25:24 by haekang           #+#    #+#             */
-/*   Updated: 2023/04/09 14:21:52 by haekang          ###   ########.fr       */
+/*   Updated: 2023/04/09 19:26:46 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	*result_malloc(char *str, char c, char **result, int idx)
 
 static char	**result_double_malloc(char *str, char c)
 {
-	int		cnt;
+	size_t	cnt;
 	char	**result;
 
 	cnt = 0;

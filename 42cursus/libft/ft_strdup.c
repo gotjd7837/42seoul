@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 05:53:33 by haekang           #+#    #+#             */
-/*   Updated: 2023/03/29 06:00:53 by haekang          ###   ########.fr       */
+/*   Updated: 2023/04/09 17:30:55 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strdup(const char *s1)
 {
-	int		i;
+	size_t	i;
 	char	*str;
 
 	i = ft_strlen(s1);

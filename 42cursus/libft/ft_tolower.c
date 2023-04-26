@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 18:17:24 by haekang           #+#    #+#             */
-/*   Updated: 2023/03/28 23:25:54 by haekang          ###   ########.fr       */
+/*   Updated: 2023/04/09 17:59:26 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_tolower(int c)
 {
-	if (c < 'A' || c > 'Z')
-		return (c);
-	return (c + ('a' - 'A'));
+	if (c >= 'A' && c <= 'Z')
+		return (c + ('a' - 'A'));
+	return (c);
 }

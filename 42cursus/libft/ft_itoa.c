@@ -6,16 +6,16 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 01:51:03 by haekang           #+#    #+#             */
-/*   Updated: 2023/04/03 10:49:31 by haekang          ###   ########.fr       */
+/*   Updated: 2023/04/09 19:17:39 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*result_malloc(long value, int *len, int *neg_flag)
+static char	*result_malloc(long value, size_t *len, unsigned char *neg_flag)
 {
-	int		cnt;
-	char	*result;
+	unsigned char	cnt;
+	char			*result;
 
 	cnt = 0;
 	if (value < 0)
@@ -43,10 +43,10 @@ static char	*result_malloc(long value, int *len, int *neg_flag)
 
 char	*ft_itoa(int n)
 {
-	long	value;
-	int		len;
-	int		neg_flag;
-	char	*result;
+	long			value;
+	size_t			len;
+	unsigned char	neg_flag;
+	char			*result;
 
 	value = (long)n;
 	neg_flag = 0;
