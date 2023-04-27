@@ -6,14 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 20:00:13 by haekang           #+#    #+#             */
-/*   Updated: 2023/04/26 20:00:51 by haekang          ###   ########.fr       */
+/*   Updated: 2023/04/27 20:08:21 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdarg.h>
-#include <unistd.h>
-#include <stdlib.h>
+#include "ft_printf.h"
 
 static char	*result_malloc(long value, size_t *len, unsigned char *neg_flag)
 {
@@ -46,12 +43,12 @@ static char	*result_malloc(long value, size_t *len, unsigned char *neg_flag)
 
 char	*ft_unsigned_itoa(unsigned int n)
 {
-	long long			value;
+	long			value;
 	size_t			len;
 	unsigned char	neg_flag;
 	char			*result;
 
-	value = (long long)n;
+	value = (long)n;
 	neg_flag = 0;
 	result = result_malloc(value, &len, &neg_flag);
 	if (result == NULL)

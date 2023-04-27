@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
+/*   ft_memory_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/21 23:24:32 by haekang           #+#    #+#             */
-/*   Updated: 2023/04/27 20:07:09 by haekang          ###   ########.fr       */
+/*   Created: 2023/04/27 14:49:34 by haekang           #+#    #+#             */
+/*   Updated: 2023/04/27 20:51:55 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ static int	base_check(char *base)
 	return (i);
 }
 
-static void	ft_putnbr(long nb, char *base, int *len)
+static void	ft_putnbr(unsigned long nb, char *base, int *len)
 {
-	long		nbr;
-	int			baselen;
+	unsigned long	nbr;
+	unsigned int	baselen;
 
-	nbr = (long)nb;
+	nbr = (unsigned long)nb;
 	baselen = base_check(base);
 	if (nbr < 0)
 	{
@@ -61,7 +61,7 @@ static void	ft_putnbr(long nb, char *base, int *len)
 	}
 }
 
-int	ft_putnbr_base(unsigned int nbr, char *base)
+int	ft_memory_base(unsigned long nbr, char *base)
 {
 	int	len;
 

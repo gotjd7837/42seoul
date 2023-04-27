@@ -6,11 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:44:14 by haekang           #+#    #+#             */
-/*   Updated: 2023/04/26 18:59:02 by haekang          ###   ########.fr       */
+/*   Updated: 2023/04/27 15:39:56 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "ft_printf.h"
 
 size_t	ft_strlen(const char *str)
 {

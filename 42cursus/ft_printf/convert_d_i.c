@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   convert_d_i.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 02:55:44 by haekang           #+#    #+#             */
-/*   Updated: 2023/04/27 20:18:39 by haekang          ###   ########.fr       */
+/*   Created: 2023/04/27 18:56:00 by haekang           #+#    #+#             */
+/*   Updated: 2023/04/27 19:57:07 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putchar(char c)
+int	convert_d_i(va_list ap)
 {
-	write(1, &c, 1);
+	char	*str;
+	int		num;
+	int		res;
+
+	num = (int)va_arg(ap, int);
+	str = ft_itoa(num);
+	ft_putstr(str);
+	res = ft_strlen(str);
+	free(str);
+	return (res);
 }

@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   convert_s.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 02:55:44 by haekang           #+#    #+#             */
-/*   Updated: 2023/04/27 20:18:39 by haekang          ###   ########.fr       */
+/*   Created: 2023/04/27 18:48:49 by haekang           #+#    #+#             */
+/*   Updated: 2023/04/27 19:52:34 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putchar(char c)
+int	convert_s(va_list ap)
 {
-	write(1, &c, 1);
+	char	*str;
+
+	str = (char *)va_arg(ap, char *);
+	if (str == NULL)
+	{
+		ft_putstr("(null)");
+		return (6);
+	}
+	ft_putstr(str);
+	return (ft_strlen(str));
 }
