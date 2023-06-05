@@ -258,6 +258,9 @@ SSH 서비스
 - sudo adduser [사용자명]
 
 패스워드 생성 규칙
+- sudo vi /etc/login.defs
+- sudo vim /etc/pam.d/common-password
+- 다음 두 파일을 수정해서 패스워드 정책 수립
 
 새로운 그룹 생성
 - sudo addgroup [그룹명]
@@ -296,14 +299,22 @@ sudo를 사용하는 이유와 동작 예시 제시
 
 ## UFW
 UFW란 ?
+- 데비안의 방화벽 설정 프로그램
 
 UFW를 사용함으로써 얻는 장점
+- UFW를 통해 보안을 강화할 수 있다. 기본적으로 모든 연결을 거부하도록 설정하고 필요한 포트만 열어서 사용할 수 있다.
 
 UFW의 규칙, 4242포트
+- sudo ufw status verbose
+- 들어오는 것 deny 나가는 것 allow
+- sudo ufw allow 4242
+- 4242포트 허용
 
 8080포트 열기
+- sudo ufw allow 8080
 
 8080포트 닫기
+- sudo ufw deny 8080
 
 ## SSH
 SSH란 ?
