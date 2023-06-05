@@ -83,81 +83,133 @@ This user has to belong to the user42 and sudo groups.
 **이 유저는 user42와 sudo 그룹에 속해있어야 합니다.**
 
 ℹ️During the defense, you will have to create a new user and assign it to a group.
+
 **평가 중, 여러분은 새 유저를 생성하고, 그룹에 가입시켜야 합니다.**
 
 
 To set up a strong password policy, you have to comply with the following requirements:
+
 **강력한 패스워드 규정을 구성하는 데에 있어서, 여러분은 다음과 같은 요구사항들을 적용해야 합니다:**
 
 Your password has to expire every 30 days.
+
 **패스워드는 매 30일마다 만료되어야 한다.**
+
 The minimum number of days allowed before the modification of a password will be set to 2.
+
 **패스워드 변경 후에 수정이 가능한 최소 경과일 수는 2일이어야 한다.**
+
 The user has to receive a warning message 7 days before their password expires.
+
 **유저는 패스워드 만료 7일 전에 경고 메시지를 받아야 한다.**
+
 Your password must be at least 10 characters long. It must contain an uppercase letter, a lowercase letter, and a number. Also, it must not contain more than 3 consecutive identical characters.
+
 **패스워드는 대문자, 소문자, 숫자를 포함한 최소 10글자 이상이어야 한다. 또, 반복되는 글자가 3글자 초과인 경우는 포함되지 않아야 한다.**
+
 The password must not include the name of the user.
+
 **패스워드는 유저의 이름을 포함하지 않아야 한다.**
+
 The following rule does not apply to the root password: The password must have at least 7 characters that are not part of the former password.
+
 **다음 규칙은 root 패스워드에 적용되지 않습니다 : 현재 패스워드는 최소 7글자 이상이 이전 패스워드와 달라야 한다.**
+
 Of course, your root password has to comply with this policy.
+
 **당연히, root 패스워드에도 이 규정은 적용되어야 합니다.**
 
 ⚠️After setting up your configuration files, you will have to change all the passwords of the accounts present on the virtual machine, including the root account.
+
 ⚠️**패스워드 구성 파일들을 설정한 후에, 여러분은 root 계정을 포함한 가상 머신에 있는 모든 비밀번호를 바꾸셔야 할 겁니다.**
 
 
 To set up a strong configuration for your sudo group, you have to comply with the following requirements:
+
 **여러분의 sudo 그룹의 강력한 규정을 구성하기 위해서, 다음의 요구사항들을 적용해야 합니다:**
 
 Authentication using sudo has to be limited to 3 attempts in the event of an incorrect password.
+
 **sudo를 사용하기 위한 인증에서, 잘못된 비밀번호 입력의 경우 3번의 시도로 제한되어야 한다.**
+
 A custom message of your choice has to be displayed if an error due to a wrong password occurs when using sudo.
+
 **sudo 사용 중, 잘못된 패스워드로 인한 에러가 발생했을 때에 여러분이 설정한 메시지가 출력되어야 한다.**
+
 Each action using sudo has to be archived, both inputs and outputs. The log file has to be saved in the /var/log/sudo/ folder.
+
 **sudo를 통한 모든 동작(입출력)은 저장되어야 합니다. log 파일들은 /var/log/sudo 폴더에 저장되어야 한다.**
+
 The TTY mode has to be enabled for security reasons.
+
 **보안적인 이유로 인해, TTY 모드는 적용되어 있어야 한다.**
+
 For security reasons too, the paths that can be used by sudo must be restricted.
+
 **같은 이유로, sudo를 사용할 수 있는 경로는 제한되어있어야 한다.**
+
 Example:
+
 경로 예시:
 /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
 
 Finally, you have to create a simple script called monitoring.sh. It must be developed in bash.
+
 **최종적으로, 여러분은 monitoring.sh라고 하는 간단한 스크립트를 작성해야 합니다. 스크립트는 bash로 작성되어야 합니다.**
 
 At server startup, the script will display some information (listed below) on all terminals every 10 minutes (take a look at wall). The banner is optional. No error must be visible.
 **서버를 시작할 때, 스크립트는 아래에 나열된 정보들을 모든 터미널에 매 10분마다 표시해야 합니다(wall을 잘 살펴보세요). 배너는 선택사항입니다. 에러는 표시되지 않아야 합니다.**
 
 Your script must always be able to display the following information:
+
 **여러분의 스크립트는 다음의 정보들을 항상 표시할 수 있어야 합니다.**
 
 The architecture of your operating system and its kernel version.
 - 운영체제와 커널의 버전에 대한 구조
+
 The number of physical processors
 - 물리 프로세서들의 수
+
+
 The number of virtual processors.
 - 가상 프로세서들의 수
+
+
 The current available RAM on your server and its utilization rate as a percentage.
 - 현재 서버에서 사용가능한 RAM과 백분율로 표현된 사용률.
+
+
 The current available memory on your server and its utilization rate as a percentage.
 - 현재 서버에서 사용가능한 memory와 백분율로 표현된 사용률.
+
 The current utilization rate of your processors as a percentage.
 - 백분율로 표현된 프로세서들의 현재 사용률.
+
+
 The date and time of the last reboot.
 - 마지막으로 재시작된 날짜와 시간.
+
+
 Whether LVM is active or not.
 - LVM의 활성화 여부.
+
+
 The number of active connections.
 - 활성화된 연결들의 개수.
+
+
 The number of users using the server.
 - 서버를 사용하고 있는 유저의 수.
+
+
 The IPv4 address of your server and its MAC (Media Access Control) address.
 - 서버의 IPv4 주소와 MAC 주소.
+
+
 The number of commands executed with the sudo program
 - sudo 프로그램으로 실행된 명령의 수.
+
+
 ℹ️During the defense, you will be asked to explain how this script works. You will also have to interrupt it without modifying it. Take a look at cron.
 
 **ℹ️평가 중, 여러분은 스크립트가 어떻게 동작하는지 질문받게 될 겁니다. 또, 스크립트를 수정하지 않고 그 동작을 중지시켜야 합니다. cron을 잘 살펴보세요.**
