@@ -251,6 +251,22 @@ SSH 서비스
 **systemctl status ssh** 로 실행 확인이 가능하다.
 
 ## 사용자 설정
+로그인한 유저 그룹 확인
+- id [사용자명]
+
+사용자 생성
+- sudo adduser [사용자명]
+
+패스워드 생성 규칙
+
+새로운 그룹 생성
+- sudo addgroup [그룹명]
+
+그룹 추가
+- sudo usermod -G sudo,user42 [사용자명]
+- - 사용자가 속한 그룹을 sudo,user42로 변경
+
+
 
 
 
