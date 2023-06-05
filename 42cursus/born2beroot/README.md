@@ -1,63 +1,85 @@
 # Born2beroot
 Summary: This document is a System Administration related exercise.
 version : 2
+
 **요약 : 이 과제는 시스템(운영체제) 관리 관련 실습입니다.
 버전 : 2**
 
 ## Introduction
 This project aims to introduce you to the wonderful world of virtualization.
+
 **이 과제에서는 여러분에게 가상화의 멋진 세상을 소개해드리고자 합니다.**
 
 
 You will create your first machine in VirtualBox (or UTM if you can’t use VirtualBox) under specific instructions. Then, at the end of this project, you will be able to set up your own operating system while implementing strict rules
+
 **여러분은 VirtualBox를 통해서 (불가능하다면 UTM을 통해서) 주어진 요구사항들에 따라 첫 가상 머신을 만들 것입니다. 그리고 나면, 과제를 마칠 때 즈음 여러분은 엄격한 규칙들로 이루어진 자신만의 운영체제를 구현할 수 있을 것입니다.**
 
 ## Mandatory part
 This project consists of having you set up your first server by following specific rules.
+
 **이 과제는 여러분의 첫 서버를 특정 규칙들에 따라 구현하게끔 할 것입니다.**
 
 
 ⚠️Since it is a matter of setting up a server, you will install the minimum of services. For this reason, a graphical interface is of no use here. It is therefore forbidden to install X.org or any other equivalent graphics server. Otherwise, your grade will be 0.
+
 ⚠**서버를 구성하는 것이 주요 사항이기 때문에, 최소한의 서비스만 설치하셔야 합니다. 이 때문에, 그래픽 인터페이스는 이 과제에서 사용되지 않습니다. 그래픽 인터페이스를 사용할 수 없으므로, X.org나 그에 상응하는 다른 그래픽 서버들은 설치할 수 없습니다. 만약 설치했다면, 0점을 받게될 것입니다.**
 
 
 You must choose as an operating system either the latest stable version of Debian (no testing/unstable), or the latest stable version of Rocky. Debian is highly recommended if you are new to system administration.
+
 **여러분은 가장 최신의 stable 버전인 Debian(testing/unstable 제외) 혹은, 가장 최신의 stable 버전인 Rocky 둘 중에 한 운영체제를 선택하셔야 합니다. 만약 시스템 관리가 처음이시라면, Debian 을 강력히 추전드립니다.**
 
 
 ℹ️ setting up Rocky is quite complex. Therefore, you don’t have to set up KDump. However, SELinux must be running at startup and its configuration has to be adapted for the project’s needs. AppArmor for Debian must be running at startup too.
+
 ℹ️ **Rocky를 세팅하는 것은 꽤 복잡합니다. 그렇기 때문에, 여러분은 KDump까지 설치할 필요는 없습니다. 하지만, SELinux는 실행되었을 때 반드시 작동하고 있어야하고, SELinux은 과제에서 요구하는 사항에 따라 구성되어있어야 합니다. Debian의 경우에는 AppArmor가 실행 시에 작동하고있어야 합니다.**
 
 
 ℹ️During the defense, you will be asked a few questions about the operating system you chose. For instance, you should know the differences between aptitude and apt, or what SELinux or AppArmor is. In short, understand what you use!
+
 **평가를 진행하면서, 여러분은 여러분이 선택한 운영체제에 대한 질문들을 받게 될 것입니다. 예를 들면, apt와 aptitude의 차이점, 혹은 SElinux 또는 AppArmor가 무엇인지 등 말이죠. 요약하자면, 여러분이 사용하고 있는 것이 무엇인지 아셔야 합니다!**
 
 
 A SSH service will be running on port 4242 only. For security reasons, it must not be possible to connect using SSH as root.
+
 **SSH 서비스는 4242포트에서만 작동해야 합니다. 보안적인 이유로, root로는 SSH에 연결할 수 없어야 합니다.**
 
 
 ℹ️The use of SSH will be tested during the defense by setting up a new account. You must therefore understand how it works.
+
 **SSH의 용법은 평가를 진행하면서, 생성된 새 계정을 통해 테스트됩니다. 그러니 SSH가 어떻게 작동하는지 아셔야 합니다.**
 
 
 You have to configure your operating system with the UFW (or firewalld for Rocky) firewall and thus leave only port 4242 open.
+
 **여러분은 UFW(Rocky인 경우 firewalld) 방화벽을 여러분의 운영체제에 구성해놓으셔야 하고, 그에 따라 4242 포트만 열어놓으셔야 합니다.**
 
 
 ℹ️Your firewall must be active when you launch your virtual machine. For Rocky, you have to use firewalld instead of UFW.
+
 **여러분이 가상 머신을 켰을 때, 방화벽이 작동하고 있어야 합니다. Rocky의 경우에는, UFW 대신 firewalld가 작동하고 있어야 합니다.**
 
 
+
 The hostname of your virtual machine must be your login ending with 42 (e.g. wil42). You will have to modify this hostname during your evaluation.
+
 **여러분의 가상 머신의 hostname은 여러분의 42로 끝나는 여러분의 아이디여야 합니다(예시 : wil42). 평가 중에 여러분은 hostname을 수정하셔야 할 겁니다.**
+
 You have to implement a strong password policy.
+
 **여러분은 강력한 패스워드 정책을 구현하셔야 합니다.**
+
 You have to install and configure sudo following strict rules.
+
 **여러분은 엄격한 규칙에 따라서 sudo를 설치하고, 구성하셔야 합니다.**
+
 In addition to the root user, a user with your login as username has to be present.
+
 **root 유저에 더해서, 여러분의 아이디에 따른 유저도 존재해야 합니다.**
+
 This user has to belong to the user42 and sudo groups.
+
 **이 유저는 user42와 sudo 그룹에 속해있어야 합니다.**
 
 ℹ️During the defense, you will have to create a new user and assign it to a group.
