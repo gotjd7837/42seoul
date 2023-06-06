@@ -290,10 +290,14 @@ sudo 프로그램이 잘 설치되어 있는지 ?
 - 이때 이미 할당됨
 
 sudo를 사용하는 이유와 동작 예시 제시
+- sudo는 일시적으로 관리자 권한을 빌려서 사용하는 명령어임
+- 관리자 권한은 권한이 무한대임 고로 해커들이 최우선적으로 원하는 것이 관리자 권한을 얻는 것이다 sudo권한을 일시적으로 빌려서 사용하게 함으로써 계정 정보가 노출 당해도 관리자 권한까지 노출당하지 않도록 해서 보안을 강화하는 것임
 
 과제에서 요구하는 sudo 규칙에 대한 구현
+-
 
 "/var/log/sudo/" 폴더가 존재하는 지, 그리고 그것이 최소한 한 개의 파일을 갖는 지 확인
+-
 
 이 폴더 속 파일들의 내용을 확인할 때, sudo와 함께 사용된 명령어들의 기록을 볼 수 있어야함
 
@@ -324,6 +328,28 @@ SSH의 장점
 SSH가 4242포트만을 사용하는지 ?
 
 root유저로 ssh연결을 차단
+
+## cron
+유닉스 계열 컴퓨터의 잡 스케쥴러이다.
+특정한 작업을 고정된 시간에 실행할 수 있도록 해준다.
+
+- sudo crontab -l 로 크론탭 파일을 cat해서 볼 수 있음
+- sudo crontab -e 로 크론탭 파일을 열어줌
+
+
+
+$ systemctl status cron.service # status check
+
+
+$ sudo service cron start # start
+$ /etc/init.d/cron start # 멈추기
+$ sudo systemctl disable cron # 재부팅 후에 멈추기
+
+$ /etc/init.d/cron stop # stop
+$ sudo service cron stop # stop
+
+$ sudo crontab -e # edit
+$ sudo crontab -l # list
 
 
 
