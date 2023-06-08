@@ -136,13 +136,19 @@ $ systemctl status cron.service # status check
 
 
 $ sudo service cron start # start
+
 $ /etc/init.d/cron start # 멈추기
+
 $ sudo systemctl disable cron # 재부팅 후에 멈추기
 
+$ sudo systemctl enable cron # 재부팅 후에 재시작
+
 $ /etc/init.d/cron stop # stop
+
 $ sudo service cron stop # stop
 
 $ sudo crontab -e # edit
+
 $ sudo crontab -l # list
 
 
