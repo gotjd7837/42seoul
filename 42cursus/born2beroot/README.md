@@ -61,6 +61,30 @@ SSH 서비스
 - sudo usermod -G sudo,user42 [사용자명]
 - - 사용자가 속한 그룹을 sudo,user42로 변경
 
+## 패스워드 규정
+
+**$ sudo vi /etc/login.defs**
+PASS_MAX_DAYS 30 
+PASS_MIN_DAYS 2 
+PASS_WARN_AGE 7 
+PASS_MIN_LEN 10 
+
+
+$ sudo apt install libpam-pwquality cracklib-runtime
+pwquality 설치
+
+**$ sudo vim /etc/pam.d/common-password**
+password    requisite      pam_pwquality.so minlen=10 ucredit=-1 dcredit=-1 maxrepeat=3 difok=7 reject_username enforce_for_root
+
+minlen=10 최소 길이
+ucredit 대문자 =-1 최소 하나이상
+dcredit 숫자 =-1 최소 하나 이상
+maxrepeat 반복제한 3
+difok 이전 비밀번호와 겹치는 글자 제한 7
+reject_username 유저네임 그대로 of 거꾸로 포함 제한
+enforce_for_root 루트에도 적용
+
+
 
 ## 호스트명과 파티션
 
@@ -71,6 +95,9 @@ SSH 서비스
 - lsblk
 
 LVM이 어떻게 동작하는지 ?
+
+LVM은 디스크 관리를 용이하게 하기 위해서 커널에서 제공하는 디스크 관리 프로그램이다.
+디스크의 물리적 용량을 같은 크기로 나누어 하나의 볼륨으로 만들고 사용자에 입맛에 맞게 파티션을 나누어준다
 
 ## sudo
 sudo 프로그램이 잘 설치되어 있는지 ?
