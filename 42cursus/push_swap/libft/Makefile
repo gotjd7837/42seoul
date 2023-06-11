@@ -65,7 +65,8 @@ bonus : $(OBJS) $(OBJS_B)
 clean :
 	rm -f $(OBJS) $(OBJS_B)
 
-fclean : clean
+fclean :
+	make clean
 	rm -f $(NAME)
 
 re :
