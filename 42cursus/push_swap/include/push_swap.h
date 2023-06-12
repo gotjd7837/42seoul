@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 20:46:32 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/12 16:52:43 by haekang          ###   ########.fr       */
+/*   Updated: 2023/06/12 19:22:42 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@
 typedef struct s_node
 {
 	int				content;
-	t_node			*prev;
-	t_node			*next;
+	struct s_node	*prev;
+	struct s_node	*next;
 }					t_node;
 
 typedef struct s_stack
 {
 	int				size;
-	t_node			*top;
-	t_node			*bottom;
+	struct s_node	*top;
+	struct s_node	*bottom;
 }					t_stack;
 
 #endif

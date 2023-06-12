@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "./include/push_swap.h"
 
 t_node	*new_node(int content)
 {
@@ -47,11 +47,21 @@ int	main(int ac, char *av[])
 {
 	t_stack		*stack_a;
 	t_stack		*stack_b;
-	int			*arg_arr;
+	int			*arg_arr;//인자들을 int형 배열로 변환해서 넣을거임
 
 	if (ac < 2)
 		return (0);
 	stack_a = init_stack();
 	stack_b = init_stack();
-	arg_arr = get_arg_arr();
+	arg_arr = av_to_arr(ac, av);//인자들을 받아서 int형 배열로 만듬과 동시에 에러처리까지
+	//int형 배열을 stack_a에 넣어줄거임
+	//그다음 stack_a를 정렬함
 }
+
+// 1. 정수가 아닌 값이 들어왔을 때 'Error' 출력
+
+// 2. 정수가 중복해서 들어왔을 때 'Error' 출력
+
+// 3. MAXINT 보다 큰 값 혹은 MININT보다 작은 값이 들어왔을때 'Error' 출력
+
+// 4. 인자 없이, 혹은 인자가 하나밖에 없거나 이미 정렬된 채로 실행되면 아무것도 출력하지 않고 종료
