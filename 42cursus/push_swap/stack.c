@@ -6,11 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 20:35:19 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/13 21:10:40 by haekang          ###   ########.fr       */
+/*   Updated: 2023/06/14 15:21:21 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./include/push_swap.h"
+#include "push_swap.h"
 
 void	add_node(t_stack *stack, t_node *new_node)
 {

@@ -4,7 +4,7 @@ SRCS=test.c
 
 OBJS=$(SRCS:.c=.o)
 HEADER=./include
-LIBFT_DIR=./libft
+LIBFT_DIR=./include/libft
 NAME=push_swap
 
 .PHONY: all clean fclean re
@@ -12,18 +12,18 @@ NAME=push_swap
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-	make -C ./libft
-	$(CC) $(CFLAGS) -o $@ $^ -L.$(LIBFT_DIR) -lft
+	make -C $(LIBFT_DIR)
+	$(CC) $(CFLAGS) -o $@ $^ -L$(LIBFT_DIR) -lft
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c -o $@ $^ -I$(HEADER)
 
 clean :
-	make -C ./libft clean
+	make -C $(LIBFT_DIR) clean
 	rm -f $(OBJS)
 
 fclean :
-	make -C ./libft fclean
+	make -C $(LIBFT_DIR) fclean
 	make clean
 	rm -f $(NAME)
 

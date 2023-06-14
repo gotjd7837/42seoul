@@ -6,14 +6,14 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 20:46:32 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/12 19:22:42 by haekang          ###   ########.fr       */
+/*   Updated: 2023/06/14 15:38:52 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "../libft/libft.h"
+# include "./libft/libft.h"
 
 typedef struct s_node
 {
