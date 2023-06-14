@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:50:11 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/14 15:21:09 by haekang          ###   ########.fr       */
+/*   Updated: 2023/06/14 21:14:44 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int get_arr_size(int ac, char *av[])
 
 }
 
-int *av_to_arr(int ac, char *av[])
+void *av_to_stack(t_stack *stack, int ac, char *av[])
 {
     int *result;
     int arr_size;
