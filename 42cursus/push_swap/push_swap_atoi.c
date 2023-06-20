@@ -1,33 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   push_swap_atoi.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/11 20:46:24 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/20 21:26:14 by haekang          ###   ########.fr       */
+/*   Created: 2023/06/20 20:31:09 by haekang           #+#    #+#             */
+/*   Updated: 2023/06/20 20:34:19 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack	*init_stack(void);
-t_node	*new_node(int content);
-void	add_node(t_stack *stack, t_node *new_node);
-void	*av_to_stack(t_stack *stack, int ac, char *av[]);
-
-int	main(int ac, char *av[])
+int	push_swap_atoi(const char *str)
 {
-	t_stack	*stack_a;
-	t_stack	*stack_b;
+	int	flag;
+	int	result;
 
-	if (ac >= 2)
+	flag = 1;
+	result = 0;
+	while (*str == ' ' || (*str >= 9 && *str <= 13))
+		str++;
+	if (*str == '-' || *str == '+')
 	{
-		stack_a = init_stack();
-		stack_b = init_stack();
-		av_to_stack(stack_a, ac, av);
+		if (*str == '-')
+			flag = -1;
+		str++;
 	}
-	else
-		print_error();
+	while (*str != 0)
+	{
+		if (*str >= '0' && *str <= '9')
+			result = result * 10 + (*str++ - '0');
+		else
+        {
+            
+        }
+	}
+	return (result * flag);
 }

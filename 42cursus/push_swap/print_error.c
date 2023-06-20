@@ -6,13 +6,14 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 18:10:29 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/20 19:44:58 by haekang          ###   ########.fr       */
+/*   Updated: 2023/06/20 21:26:08 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void    printf_error(void)
+void print_error(void)
 {
-	
+	write(1, "Error\n", 6);
+	exit(1);
 }

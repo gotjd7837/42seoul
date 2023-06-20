@@ -6,30 +6,68 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:50:11 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/20 19:44:54 by haekang          ###   ########.fr       */
+/*   Updated: 2023/06/20 21:31:57 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
-int get_arr_size(int ac, char *av[])
+long long	push_swap_atoi(const char *str)
 {
+	int			flag;
+	long long	result;
 
+	flag = 1;
+	result = 0;
+	while (*str == ' ' || (*str >= 9 && *str <= 13))
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			flag = -1;
+		str++;
+	}
+	while (*str != '\0')
+	{
+		if (*str >= '0' && *str <= '9')
+			result = result * 10 + (*str++ - '0');
+		else
+			print_error();
+	}
+	return (result * flag);
 }
 
-void *av_to_stack(t_stack *stack, int ac, char *av[])
+void	to_stack(t_stack *stack, char **split)
 {
-    int i;
+	int		i;
+	int		arg;
+	t_node	*node;
 
-    i = 1;
-    while (i < ac)
-    {
-        
-    }
-    
-//받아온 인자를 스플릿으로 전부 하나의 숫자형 문자를 담는
-//문자열로 만든 뒤 문자열의 전체 갯수 size를 구해서
-//size만큼 동적 할당해서 int형 배열을 만든다
+	i = 0;
+	while (split[i] != NULL)
+	{
+		arg = push_swap_atoi(split[i]);
+		if (arg > 2147483647 || arg < -2147483648)
+			print_error();
+		node = new_node(arg);
+		push_top_stack(stack, node);
+		i++;
+	}
+}
+
+void	*av_to_stack(t_stack *stack, int ac, char *av[])
+{
+	int		i;
+	char	**split;
+
+	i = 1;
+	while (i < ac)
+	{
+		split = ft_split(av[i], ' ');
+		to_stack(stack, split);
+		i++;
+	}
 }
 
 // 1. 정수가 아닌 값이 들어왔을 때 'Error' 출력
