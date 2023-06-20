@@ -6,16 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:50:11 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/14 21:14:44 by haekang          ###   ########.fr       */
+/*   Updated: 2023/06/20 19:44:54 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void    printf_error(void)
-{
-    
-}
 
 int get_arr_size(int ac, char *av[])
 {
@@ -24,17 +19,14 @@ int get_arr_size(int ac, char *av[])
 
 void *av_to_stack(t_stack *stack, int ac, char *av[])
 {
-    int *result;
-    int arr_size;
+    int i;
 
-    arr_size = get_arr_size(ac, av);//모든 숫자의 size
-    result = (int *)malloc(arr_size * sizeof(int));
-    if (result == NULL)
-        return (0);//에러 출력
+    i = 1;
+    while (i < ac)
+    {
+        
+    }
     
-
-    return (result);
-
 //받아온 인자를 스플릿으로 전부 하나의 숫자형 문자를 담는
 //문자열로 만든 뒤 문자열의 전체 갯수 size를 구해서
 //size만큼 동적 할당해서 int형 배열을 만든다

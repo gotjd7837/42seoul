@@ -6,37 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 20:35:19 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/14 15:21:21 by haekang          ###   ########.fr       */
+/*   Updated: 2023/06/20 19:44:59 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	add_node(t_stack *stack, t_node *new_node)
-{
-	t_node	*added_node;
-	int		i;
-
-	i = 0;
-	if (stack->size == 0)
-	{
-		stack->top->next = new_node;
-		stack->bottom->prev = new_node;
-		new_node->prev = stack->top;
-		new_node->next = stack->bottom;
-		stack->size += 1;
-	}
-	else
-	{
-		added_node = stack->top;
-		while (i++ < stack->size)
-			added_node = added_node->next;
-		added_node->next = new_node;
-		new_node->prev = added_node;
-		new_node->next = stack->bottom;
-		stack->size += 1;
-	}
-}
 
 t_node	*new_node(int content)
 {
@@ -49,6 +23,82 @@ t_node	*new_node(int content)
 	node->next = NULL;
 	node->content = content;
 	return (node);
+}
+
+void	push_top_stack(t_stack *stack, t_node *ph_node)
+{
+	if (stack->size == 0)
+	{
+		stack->top->next = ph_node;
+		stack->bottom->prev = ph_node;
+		ph_node->prev = stack->top;
+		ph_node->next = stack->bottom;
+		stack->size += 1;
+	}
+	else
+	{
+		stack->top->next->prev = ph_node;
+		ph_node->next = stack->top->next;
+		stack->top->next = ph_node;
+		ph_node->prev = stack->top;
+		stack->size += 1;
+	}
+}
+
+void	push_bottom_stack(t_stack *stack, t_node *ph_node)
+{
+	if (stack->size == 0)
+	{
+		stack->top->next = ph_node;
+		stack->bottom->prev = ph_node;
+		ph_node->prev = stack->top;
+		ph_node->next = stack->bottom;
+		stack->size += 1;
+	}
+	else
+	{
+		stack->bottom->prev->next = ph_node;
+		ph_node->prev = stack->bottom->prev;
+		stack->bottom->prev = ph_node;
+		ph_node->next = stack->bottom;
+		stack->size += 1;
+	}
+}
+
+t_node	*pop_top_stack(t_stack *stack)
+{
+	t_node	*pop_node;
+
+	pop_node = stack->top->next;
+	if (stack->size == 0)
+		return (NULL);
+	else
+	{
+		pop_node->next->prev = stack->top;
+		stack->top->next = pop_node->next;
+		pop_node->prev = NULL;
+		pop_node->next = NULL;
+		stack->size -= 1;
+		return (pop_node);
+	}
+}
+
+t_node	*pop_bottom_stack(t_stack *stack)
+{
+	t_node	*pop_node;
+
+	pop_node = stack->bottom->prev;
+	if (stack->size == 0)
+		return (NULL);
+	else
+	{
+		pop_node->prev->next = stack->bottom;
+		stack->bottom->prev = pop_node->prev;
+		pop_node->prev = NULL;
+		pop_node->next = NULL;
+		stack->size -= 1;
+		return (pop_node);
+	}
 }
 
 t_stack	*init_stack(void)
