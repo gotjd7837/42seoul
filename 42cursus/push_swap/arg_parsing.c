@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arg_passing.c                                      :+:      :+:    :+:   */
+/*   arg_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:50:11 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/20 21:31:57 by haekang          ###   ########.fr       */
+/*   Updated: 2023/06/21 16:09:25 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 long long	push_swap_atoi(const char *str)
 {
@@ -38,11 +37,11 @@ long long	push_swap_atoi(const char *str)
 	return (result * flag);
 }
 
-void	to_stack(t_stack *stack, char **split)
+void	av_to_stack(t_stack *stack, char **split)
 {
-	int		i;
-	int		arg;
-	t_node	*node;
+	t_node		*node;
+	long long	arg;
+	int			i;
 
 	i = 0;
 	while (split[i] != NULL)
@@ -56,7 +55,7 @@ void	to_stack(t_stack *stack, char **split)
 	}
 }
 
-void	*av_to_stack(t_stack *stack, int ac, char *av[])
+void	*arg_parsing(t_stack *stack, int ac, char *av[])
 {
 	int		i;
 	char	**split;
@@ -65,7 +64,7 @@ void	*av_to_stack(t_stack *stack, int ac, char *av[])
 	while (i < ac)
 	{
 		split = ft_split(av[i], ' ');
-		to_stack(stack, split);
+		av_to_stack(stack, split);
 		i++;
 	}
 }
@@ -77,3 +76,5 @@ void	*av_to_stack(t_stack *stack, int ac, char *av[])
 // 3. MAXINT 보다 큰 값 혹은 MININT보다 작은 값이 들어왔을때 'Error' 출력
 
 // 4. 인자 없이, 혹은 인자가 하나밖에 없거나 이미 정렬된 채로 실행되면 아무것도 출력하지 않고 종료
+
+// ㅈㅜㅇ보ㄱ이랑 정렬된채로 들들어어왔왔을을때 처처리만 남음

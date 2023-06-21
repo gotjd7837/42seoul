@@ -1,40 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_atoi.c                                   :+:      :+:    :+:   */
+/*   instr_rotate.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/20 20:31:09 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/20 20:34:19 by haekang          ###   ########.fr       */
+/*   Created: 2023/06/21 15:47:20 by haekang           #+#    #+#             */
+/*   Updated: 2023/06/21 15:58:53 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	push_swap_atoi(const char *str)
+void	ra(t_stack *stack_a)
 {
-	int	flag;
-	int	result;
+	t_node	*node;
 
-	flag = 1;
-	result = 0;
-	while (*str == ' ' || (*str >= 9 && *str <= 13))
-		str++;
-	if (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			flag = -1;
-		str++;
-	}
-	while (*str != 0)
-	{
-		if (*str >= '0' && *str <= '9')
-			result = result * 10 + (*str++ - '0');
-		else
-        {
-            
-        }
-	}
-	return (result * flag);
+	node = pop_top_stack(stack_a);
+	if (node == NULL)
+		return ;
+	push_bottom_stack(stack_a, node);
+}
+
+void	rb(t_stack *stack_b)
+{
+	t_node	*node;
+
+	node = pop_top_stack(stack_b);
+	if (node == NULL)
+		return ;
+	push_bottom_stack(stack_b, node);
+}
+
+void	rr(t_stack *stack_a, t_stack *stack_b)
+{
+	ra(stack_a);
+	rb(stack_b);
 }

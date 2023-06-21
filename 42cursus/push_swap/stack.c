@@ -6,24 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 20:35:19 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/20 19:44:59 by haekang          ###   ########.fr       */
+/*   Updated: 2023/06/21 16:02:57 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-t_node	*new_node(int content)
-{
-	t_node	*node;
-
-	node = (t_node *)malloc(sizeof(t_node));
-	if (node == NULL)
-		return (NULL);
-	node->prev = NULL;
-	node->next = NULL;
-	node->content = content;
-	return (node);
-}
 
 void	push_top_stack(t_stack *stack, t_node *ph_node)
 {
