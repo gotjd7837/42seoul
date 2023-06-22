@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 20:46:32 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/21 16:43:35 by haekang          ###   ########.fr       */
+/*   Updated: 2023/06/22 19:44:36 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,12 @@ void		push_bottom_stack(t_stack *stack, t_node *ph_node);
 t_node		*pop_top_stack(t_stack *stack);
 t_node		*pop_bottom_stack(t_stack *stack);
 
-void		print_error(void);
+void		print_error(int sign);
 
-void		*arg_parsing(t_stack *stack, int ac, char *av[]);
+int			*arg_parsing(t_stack *stack, int ac, char *av[]);
 void		av_to_stack(t_stack *stack, char **split);
 long long	push_swap_atoi(const char *str);
+int			*stack_to_arr(t_stack *stack);
 
 void		sa(t_stack *stack_a);
 void		sb(t_stack *stack_b);

@@ -6,11 +6,32 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:50:11 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/21 16:09:25 by haekang          ###   ########.fr       */
+/*   Updated: 2023/06/22 21:03:06 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	*stack_to_arr(t_stack *stack)
+{
+	t_node	*current_node;
+	int		*arr;
+	int		i;
+	int		stack_size;
+
+	i = 0;
+	stack_size = stack->size;
+	arr = (int *)malloc(sizeof(int) * stack_size);
+	if (arr == NULL)
+		return (NULL);
+	current_node = stack->top->next;
+	while (i < stack_size)
+	{
+		arr[i++] = current_node->content;
+		current_node = current_node->next;
+	}
+	return (arr);
+}
 
 long long	push_swap_atoi(const char *str)
 {
@@ -32,7 +53,7 @@ long long	push_swap_atoi(const char *str)
 		if (*str >= '0' && *str <= '9')
 			result = result * 10 + (*str++ - '0');
 		else
-			print_error();
+			print_error(0);
 	}
 	return (result * flag);
 }
@@ -48,17 +69,18 @@ void	av_to_stack(t_stack *stack, char **split)
 	{
 		arg = push_swap_atoi(split[i]);
 		if (arg > 2147483647 || arg < -2147483648)
-			print_error();
+			print_error(0);
 		node = new_node(arg);
 		push_top_stack(stack, node);
 		i++;
 	}
 }
 
-void	*arg_parsing(t_stack *stack, int ac, char *av[])
+int	*arg_parsing(t_stack *stack, int ac, char *av[])
 {
 	int		i;
 	char	**split;
+	int		*stack_data;
 
 	i = 1;
 	while (i < ac)
@@ -67,6 +89,11 @@ void	*arg_parsing(t_stack *stack, int ac, char *av[])
 		av_to_stack(stack, split);
 		i++;
 	}
+	if (stack->size == 0)
+		print_error(1);
+	stack_data = stack_to_arr(stack);
+	handle_arg_error(stack_data, stack->size);
+	return (stack_data);
 }
 
 // 1. 정수가 아닌 값이 들어왔을 때 'Error' 출력
