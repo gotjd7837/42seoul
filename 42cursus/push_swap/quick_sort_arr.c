@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 19:49:58 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/22 21:51:54 by haekang          ###   ########.fr       */
+/*   Updated: 2023/06/26 14:35:47 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,102 +21,30 @@ void	swap(int *a, int *b)
 	*b = tmp;
 }
 
-int	partition(int arr[], int low, int high)
+void	quick_sort_arr(int *arr, int L, int R)
 {
+	int	left;
+	int	right;
 	int	pivot;
-	int	i;
-	int	j;
 
-	pivot = arr[high];
-	i = (low - 1);
-	j = low;
-
-	while (j <= (high - 1))
+	left = L;
+	right = R;
+	pivot = arr[(L + R) / 2];
+	while (left <= right)
 	{
-		if (arr[j] <= pivot)
+		while (arr[left] < pivot)
+			left++;
+		while (arr[right] > pivot)
+			right--;
+		if (left <= right)
 		{
-			i++;
-			swap(&arr[i], &arr[j]);
+			swap(&arr[left], &arr[right]);
+			left++;
+			right--;
 		}
-		j++;
 	}
-	swap(&arr[i + 1], &arr[high]);
-	return (i + 1);
+	if (L < right)
+		quick_sort_arr(arr, L, right);
+	if (left < R)
+		quick_sort_arr(arr, left, R);
 }
-
-void	quick_sort_arr(int *arr, int low, int high)
-{
-	int	pi;
-
-	if (low < high)
-	{
-		pi = partition(arr, low, high);
-
-		quickSort(arr, low, pi - 1);
-		quickSort(arr, pi + 1, high);
-	}
-}
-
-
-// #include <stdio.h>
-
-// void swap(int* a, int* b)
-// {
-//     int temp = *a;
-//     *a = *b;
-//     *b = temp;
-// }
-
-// int partition(int arr[], int low, int high)
-// {
-//     int pivot = arr[high];
-//     int i = (low - 1);
-
-//     for (int j = low; j <= high - 1; j++)
-//     {
-//         if (arr[j] <= pivot)
-//         {
-//             i++;
-//             swap(&arr[i], &arr[j]);
-//         }
-//     }
-
-//     swap(&arr[i + 1], &arr[high]);
-//     return (i + 1);
-// }
-
-void quickSort(int arr[], int low, int high)
-{
-    if (low < high)
-    {
-        int pi = partition(arr, low, high);
-
-        quickSort(arr, low, pi - 1);
-        quickSort(arr, pi + 1, high);
-    }
-}
-
-// void printArray(int arr[], int size)
-// {
-//     for (int i = 0; i < size; i++)
-//     {
-//         printf("%d ", arr[i]);
-//     }
-//     printf("\n");
-// }
-
-// int main()
-// {
-//     int arr[] = { 10, 7, 8, 3, 2, 10, 1, 5, 7 };
-//     int size = sizeof(arr) / sizeof(arr[0]);
-
-//     printf("Before sorting:\n");
-//     printArray(arr, size);
-
-//     quickSort(arr, 0, size - 1);
-
-//     printf("After sorting:\n");
-//     printArray(arr, size);
-
-//     return 0;
-// }

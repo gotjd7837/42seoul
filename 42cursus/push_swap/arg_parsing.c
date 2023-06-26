@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:50:11 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/22 21:03:06 by haekang          ###   ########.fr       */
+/*   Updated: 2023/06/26 15:31:11 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	*stack_to_arr(t_stack *stack)
 	return (arr);
 }
 
-long long	push_swap_atoi(const char *str)
+static long long	push_swap_atoi(const char *str)
 {
 	int			flag;
 	long long	result;
@@ -58,7 +58,7 @@ long long	push_swap_atoi(const char *str)
 	return (result * flag);
 }
 
-void	av_to_stack(t_stack *stack, char **split)
+static void	av_to_stack(t_stack *stack, char **split)
 {
 	t_node		*node;
 	long long	arg;

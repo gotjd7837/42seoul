@@ -1,5 +1,15 @@
 {
     "files.associations": {
-        "__node_handle": "c"
+        "algorithm": "c",
+        "__debug": "c",
+        "__functional_03": "c",
+        "exception": "c",
+        "functional": "c",
+        "ios": "c",
+        "memory": "c",
+        "sstream": "c",
+        "streambuf": "c",
+        "string": "c",
+        "vector": "c"
     }
 }

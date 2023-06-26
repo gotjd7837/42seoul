@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 20:46:24 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/22 19:13:41 by haekang          ###   ########.fr       */
+/*   Updated: 2023/06/26 16:26:06 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ int	main(int ac, char *av[])
 		stack_a = init_stack();
 		stack_b = init_stack();
 		sorted_data = arg_parsing(stack_a, ac, av);
+		quick_sort_stack();
 	}
 	else
 		print_error(0);
+	return (0);
 }

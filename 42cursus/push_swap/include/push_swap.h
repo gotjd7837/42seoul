@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 20:46:32 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/22 19:44:36 by haekang          ###   ########.fr       */
+/*   Updated: 2023/06/26 15:32:59 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,11 @@ t_node		*pop_bottom_stack(t_stack *stack);
 void		print_error(int sign);
 
 int			*arg_parsing(t_stack *stack, int ac, char *av[]);
-void		av_to_stack(t_stack *stack, char **split);
-long long	push_swap_atoi(const char *str);
 int			*stack_to_arr(t_stack *stack);
+
+void		handle_arg_error(int *stack_data, int size);
+
+void		quick_sort_arr(int *arr, int L, int R);
 
 void		sa(t_stack *stack_a);
 void		sb(t_stack *stack_b);
