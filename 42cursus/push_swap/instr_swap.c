@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 15:08:20 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/21 16:00:02 by haekang          ###   ########.fr       */
+/*   Updated: 2023/06/28 20:21:40 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	sa(t_stack *stack_a)
 	second_node = pop_top_stack(stack_a);
 	push_top_stack(stack_a, top_node);
 	push_top_stack(stack_a, second_node);
+	write(1, "sa\n", 3);
 }
 
 void	sb(t_stack *stack_b)
@@ -36,6 +37,7 @@ void	sb(t_stack *stack_b)
 	second_node = pop_top_stack(stack_b);
 	push_top_stack(stack_b, top_node);
 	push_top_stack(stack_b, second_node);
+	write(1, "sb\n", 3);
 }
 
 void	ss(t_stack *stack_a, t_stack *stack_b)

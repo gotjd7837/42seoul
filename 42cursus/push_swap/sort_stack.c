@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:55:40 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/28 17:39:33 by haekang          ###   ########.fr       */
+/*   Updated: 2023/06/28 21:25:05 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	best_instr_cnt(t_stack *a, t_stack *b, int *best_ra_c, int *best_rb_
 	node = b->top->next;
 	while (i < b->size)
 	{
-		ra_c = count_ra(a, node->content);
+		ra_c = count_ra(a, node->content);//이부분이 문젠가 ?
 		if (i > (b->size / 2))
 			rb_c = (b->size - i) * -1;
 		else
@@ -59,8 +59,14 @@ static void	best_instr_cnt(t_stack *a, t_stack *b, int *best_ra_c, int *best_rb_
 		{
 			*best_ra_c = ra_c;
 			*best_rb_c = rb_c;
+
+			printf("-------------베스트 로테이션 값-------------\n\n");
+			printf("베스트 ra : %d\n", best_ra_c);
+			printf("베스트 rb : %d\n", best_rb_c);
+			printf("-------------베스트 로테이션 값-------------\n\n");
 		}
 		node = node->next;
+		i++;
 	}
 }
 
@@ -71,18 +77,34 @@ static void	second_sort_stack_a(t_stack *stack_a, t_stack *stack_b)
 
 	best_ra_c = 0;
 	best_rb_c = 0;
-	best_instr_cnt(stack_a, stack_b, &best_ra_c, &best_rb_c);
-	r_a(stack_a, &best_ra_c);
-	r_b(stack_b, &best_rb_c);
-	pa(stack_a, stack_b);
+	while (stack_b->size != 0)
+	{
+		best_instr_cnt(stack_a, stack_b, &best_ra_c, &best_rb_c);//이 부분에서 문제 생기는거 같은데 rr변수를 하나 만들어서 따로 ra rb계산해서 반환하는 함수 만들어도 좋을듯
+
+		r_a(stack_a, &best_ra_c);
+		r_b(stack_b, &best_rb_c);
+		pa(stack_a, stack_b);
+		printf("a 스택 탑값 : %d\n", stack_a->top->next->content);
+	}
 	// rr_a_b(stack_a, stack_b, &best_ra_c, &best_rb_c);
 }
 
 void	sort_stack(t_stack *stack_a, t_stack *stack_b, int *sorted_data)
 {
+	printf("-------------첫 번째 정렬 부분 -------------\n");
 	first_sort_stack_b(stack_a, stack_b, sorted_data);
-	hard_coding_three(stack_a);//여기서 스택a의 크기가 3이 아닐때 세그
-	printf("3개이하면 ????\n");
-	second_sort_stack_a(stack_a, stack_b);//여기서 무조건 세그뜨는중
-	printf("찾았다\n");
+	printf("-------------첫 번째 정렬 부분 -------------\n\n\n");
+
+
+	printf("-------------하드 코딩 부분-------------\n");
+	hard_coding_three(stack_a);
+	printf("-------------하드 코딩 부분-------------\n");
+	printf("%d\n", stack_a->top->next->content);
+	printf("%d\n", stack_a->top->next->next->content);
+	printf("%d\n", stack_a->top->next->next->next->content);
+	printf("-------------하드 코딩 부분-------------\n\n\n");
+
+	printf("-------------두 번째 정렬 부분 -------------\n\n\n");
+	second_sort_stack_a(stack_a, stack_b);
+	printf("-------------두 번째 정렬 부분 -------------\n\n");
 }
