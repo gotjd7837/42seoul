@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 04:15:56 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/28 17:34:57 by haekang          ###   ########.fr       */
+/*   Updated: 2023/06/28 19:09:49 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,20 @@ void	hard_coding_three(t_stack *stack)
 	int	second;
 	int	third;
 
-	top = stack->top->next->content;
-	second = stack->top->next->next->content;
-	third = stack->top->next->next->next->content;
-	sort_three(stack, top, second, third);
+	if (stack->size == 3)
+	{
+		top = stack->top->next->content;
+		second = stack->top->next->next->content;
+		third = stack->top->next->next->next->content;
+		sort_three(stack, top, second, third);
+	}
+	else
+	{
+		top = stack->top->next->content;
+		second = stack->top->next->next->content;
+		if (top > second)
+			sa(stack);
+		else
+			return ;
+	}
 }
