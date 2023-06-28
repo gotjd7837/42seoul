@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 20:46:24 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/28 16:53:29 by haekang          ###   ########.fr       */
+/*   Updated: 2023/06/28 17:18:12 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	main(int ac, char *av[])
 		stack_a = init_stack();
 		stack_b = init_stack();
 		sorted_data = arg_parsing(stack_a, ac, av);
-		printf("개씨발/n");
 		sort_stack(stack_a, stack_b, sorted_data);
 	}
 	else

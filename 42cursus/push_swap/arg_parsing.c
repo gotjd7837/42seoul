@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:50:11 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/28 16:53:28 by haekang          ###   ########.fr       */
+/*   Updated: 2023/06/28 17:14:55 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	parse(t_stack *stack, char **split)
 		if (arg > 2147483647 || arg < -2147483648)
 			print_error(0);
 		node = new_node(arg);
-		push_top_stack(stack, node);
+		push_bottom_stack(stack, node);
 		i++;
 	}
 }
@@ -86,7 +86,6 @@ int	*arg_parsing(t_stack *stack, int ac, char *av[])
 	while (i < ac)
 	{
 		split = ft_split(av[i], ' ');
-		printf("씨발/n");
 		parse(stack, split);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:55:40 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/28 15:47:48 by haekang          ###   ########.fr       */
+/*   Updated: 2023/06/28 17:39:33 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ static void	second_sort_stack_a(t_stack *stack_a, t_stack *stack_b)
 void	sort_stack(t_stack *stack_a, t_stack *stack_b, int *sorted_data)
 {
 	first_sort_stack_b(stack_a, stack_b, sorted_data);
-	hard_coding_three(stack_a);
-	second_sort_stack_a(stack_a, stack_b);
+	hard_coding_three(stack_a);//여기서 스택a의 크기가 3이 아닐때 세그
+	printf("3개이하면 ????\n");
+	second_sort_stack_a(stack_a, stack_b);//여기서 무조건 세그뜨는중
+	printf("찾았다\n");
 }
