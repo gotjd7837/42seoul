@@ -1,6 +1,21 @@
 CC=gcc
 CFLAGS=-Wall -Wextra -Werror
-SRCS=test.c
+SRCS=	arg_parsing.c\
+		count_ra.c\
+		first_sort_stack_b.c\
+		handle_arg_error.c\
+		hard_coding.c\
+		instr_push.c\
+		instr_rev_rotate.c\
+		instr_rotate.c\
+		instr_swap.c\
+		main.c\
+		new_node.c\
+		print_error.c\
+		quick_sort_arr.c\
+		rr_a_b.c\
+		sort_stack.c\
+		stack.c\
 
 OBJS=$(SRCS:.c=.o)
 HEADER=./include

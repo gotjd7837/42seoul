@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:50:11 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/26 15:31:11 by haekang          ###   ########.fr       */
+/*   Updated: 2023/06/28 16:53:28 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static long long	push_swap_atoi(const char *str)
 	return (result * flag);
 }
 
-static void	av_to_stack(t_stack *stack, char **split)
+static void	parse(t_stack *stack, char **split)
 {
 	t_node		*node;
 	long long	arg;
@@ -86,7 +86,8 @@ int	*arg_parsing(t_stack *stack, int ac, char *av[])
 	while (i < ac)
 	{
 		split = ft_split(av[i], ' ');
-		av_to_stack(stack, split);
+		printf("씨발/n");
+		parse(stack, split);
 		i++;
 	}
 	if (stack->size == 0)

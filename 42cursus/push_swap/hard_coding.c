@@ -6,13 +6,13 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 04:15:56 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/27 04:20:48 by haekang          ###   ########.fr       */
+/*   Updated: 2023/06/28 16:01:40 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	sort_stack(t_stack *stack, int top, int second, int third)
+static void	sort_three(t_stack *stack, int top, int second, int third)
 {
 	if (top < second && second < third)
 		return ;
@@ -47,5 +47,5 @@ void	hard_coding_three(t_stack *stack)
 	top = stack->top->next->content;
 	second = stack->top->next->next->content;
 	third = stack->top->next->next->next->content;
-	sort_stack(stack, top, second, third);
+	sort_three(stack, top, second, third);
 }

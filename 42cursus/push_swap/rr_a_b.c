@@ -1,53 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_arg_error.c                                 :+:      :+:    :+:   */
+/*   rr_a_b.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/22 20:51:02 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/28 16:28:48 by haekang          ###   ########.fr       */
+/*   Created: 2023/06/28 15:24:44 by haekang           #+#    #+#             */
+/*   Updated: 2023/06/28 15:44:47 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	arr_duplicates_checker(int *arr, int size)
+void	r_b(t_stack *stack_b, int *best_rb_c)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	while (i < (size - 1))
+	while (i < *best_rb_c)
 	{
-		j = i + 1;
-		while (j < size)
-		{
-			if (arr[i] == arr[j])
-				print_error(0);
-			j++;
-		}
+		rb(stack_b);
+		write(1, "rb\n", 3);
 		i++;
 	}
 }
 
-void	arr_sort_checker(int *arr, int size)
+void	r_a(t_stack *stack_a, int *best_ra_c)
 {
 	int	i;
 
-	i = 1;
-	while (i < size)
+	i = 0;
+	while (i < *best_ra_c)
 	{
-		if (arr[i] < arr[i - 1])
-			return ;
+		rb(stack_a);
+		write(1, "ra\n", 3);
 		i++;
 	}
-	print_error(0);
 }
 
-void	handle_arg_error(int *stack_data, int size)
-{
-	arr_sort_checker(stack_data, size);
-	quick_sort_arr(stack_data, 0, size - 1);
-	arr_duplicates_checker(stack_data, size);
-}
+// void	rr_a_b(t_stack *stack_a, t_stack *stack_b, int *ra_c, int *rb_c);
+// {
+// 	int	rr_c;
+
+// 	if (*ra_c == *rb_c)
+// 		rr_c = *ra_c;
+// 	else if (*ra_c < *rb_c)
+// 	{
+// 		rr_c = *ra_c;
+// 	}
+// 	else if (*rb_c < *rb_c)
+// 	{
+// 		rr_c = *rb_c;
+// 	}
+// }
