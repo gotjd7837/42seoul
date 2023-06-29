@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:43:34 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/27 16:50:37 by haekang          ###   ########.fr       */
+/*   Updated: 2023/06/29 20:51:49 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 static void	a_to_b(t_stack *stack_a, t_stack *stack_b, int pivot)
 {
 	int	i;
+	int	size;
 	int	top;
 
 	i = 0;
-	while (i < stack_a->size)
+	size = stack_a->size;
+	while (i < size)
 	{
 		top = stack_a->top->next->content;
 		if (top <= pivot)

@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 15:59:36 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/28 20:22:00 by haekang          ###   ########.fr       */
+/*   Updated: 2023/06/29 20:49:02 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	rra(t_stack *stack_a)
 	if (node == NULL)
 		return ;
 	push_top_stack(stack_a, node);
-	write(1, "rra\n", 3);
+	write(1, "rra\n", 4);
 }
 
 void	rrb(t_stack *stack_b)
@@ -31,7 +31,7 @@ void	rrb(t_stack *stack_b)
 	if (node == NULL)
 		return ;
 	push_top_stack(stack_b, node);
-	write(1, "rrb\n", 3);
+	write(1, "rrb\n", 4);
 }
 
 void	rrr(t_stack *stack_a, t_stack *stack_b)

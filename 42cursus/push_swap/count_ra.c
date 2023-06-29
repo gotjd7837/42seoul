@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 11:18:08 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/29 17:37:36 by haekang          ###   ########.fr       */
+/*   Updated: 2023/06/29 21:15:56 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ int	count_ra(t_stack *stack_a, int b_content)
 	node = stack_a->top->next;
 	while (i < stack_a->size)
 	{
-		if (node->content > b_content && node->prev->content < b_content)
+		if (node != stack_a->bottom && node->prev != stack_a->top \
+		&& (node->content > b_content && node->prev->content < b_content))
 			break ;
 		i++;
 		node = node->next;
