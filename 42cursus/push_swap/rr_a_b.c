@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 15:24:44 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/28 21:10:30 by haekang          ###   ########.fr       */
+/*   Updated: 2023/06/29 17:01:29 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,35 @@
 
 void	r_b(t_stack *stack_b, int *best_rb_c)
 {
-	int	i;
-
-	i = 0;
-	while (i < *best_rb_c)
+	while (*best_rb_c == 0)
 	{
-		rb(stack_b);
-		i++;
+		if (*best_rb_c < 0)
+		{
+			rrb(stack_b);
+			*best_rb_c += 1;
+		}
+		else
+		{
+			rb(stack_b);
+			*best_rb_c -= 1;
+		}
 	}
 }
 
 void	r_a(t_stack *stack_a, int *best_ra_c)
 {
-	int	i;
-
-	i = 0;
-	while (i < *best_ra_c)
+	while (*best_ra_c == 0)
 	{
-		ra(stack_a);
-		i++;
+		if (*best_ra_c < 0)
+		{
+			rra(stack_a);
+			*best_ra_c += 1;
+		}
+		else
+		{
+			ra(stack_a);
+			*best_ra_c -= 1;
+		}
 	}
 }
 

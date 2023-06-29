@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:55:40 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/28 21:25:05 by haekang          ###   ########.fr       */
+/*   Updated: 2023/06/29 17:03:02 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ static void	best_instr_cnt(t_stack *a, t_stack *b, int *best_ra_c, int *best_rb_
 			*best_rb_c = rb_c;
 
 			printf("-------------베스트 로테이션 값-------------\n\n");
-			printf("베스트 ra : %d\n", best_ra_c);
-			printf("베스트 rb : %d\n", best_rb_c);
+			printf("베스트 ra : %d\n", *best_ra_c);
+			printf("베스트 rb : %d\n", *best_rb_c);
 			printf("-------------베스트 로테이션 값-------------\n\n");
 		}
 		node = node->next;
@@ -98,7 +98,7 @@ void	sort_stack(t_stack *stack_a, t_stack *stack_b, int *sorted_data)
 
 	printf("-------------하드 코딩 부분-------------\n");
 	hard_coding_three(stack_a);
-	printf("-------------하드 코딩 부분-------------\n");
+	printf("-------------하드 코딩 부분-------------\n\n\n\n");
 	printf("%d\n", stack_a->top->next->content);
 	printf("%d\n", stack_a->top->next->next->content);
 	printf("%d\n", stack_a->top->next->next->next->content);
