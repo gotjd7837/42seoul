@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 15:56:26 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/30 20:08:16 by haekang          ###   ########.fr       */
+/*   Updated: 2023/06/30 20:20:12 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ static int	compare_instr_cnt(int *best_ra, int *best_rb, int ra_c, int rb_c)
 		current_ra = *best_ra * -1;
 	else
 		current_ra = *best_ra;
-	if (*best_rb_c < 0)
-		current_rb = *best_rb_c * -1;
+	if (*best_rb < 0)
+		current_rb = *best_rb * -1;
 	else
-		current_rb = *best_rb_c;
+		current_rb = *best_rb;
 	if (ra_c < 0)
 		ra_c = ra_c * -1;
 	if (rb_c < 0)

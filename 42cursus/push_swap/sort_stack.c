@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:55:40 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/30 20:16:09 by haekang          ###   ########.fr       */
+/*   Updated: 2023/06/30 20:19:18 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	last_sort_stack(t_stack *stack_a)
 void	sort_stack(t_stack *stack_a, t_stack *stack_b, int *sorted_data)
 {
 	first_sort_stack(stack_a, stack_b, sorted_data);
-	hard_coding_three(stack_a);
+	hard_coding(stack_a, stack_b, stack_a->size);
 	second_sort_stack(stack_a, stack_b);
 	last_sort_stack(stack_a);
 }
