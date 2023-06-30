@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 04:15:56 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/28 19:15:48 by haekang          ###   ########.fr       */
+/*   Updated: 2023/06/30 20:05:19 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	sort_three(t_stack *stack, int top, int second, int third)
 	}
 }
 
-void	hard_coding_three(t_stack *stack)
+static void	hard_coding_three(t_stack *stack)
 {
 	int	top;
 	int	second;
@@ -62,4 +62,36 @@ void	hard_coding_three(t_stack *stack)
 	}
 	else
 		return ;
+}
+
+static void	hard_coding_fourth(t_stack *stack_a, t_stack *stack_b)
+{
+	int	min_idx;
+
+	min_idx = return_min_idx_or_val(stack_a, 0);
+	r_a(stack_a, &min_idx);
+	pb(stack_a, stack_b);
+	hard_coding_three(stack_a);
+	pa(stack_a, stack_b);
+}
+
+static void	hard_coding_fifth(t_stack *stack_a, t_stack *stack_b)
+{
+	int	min_idx;
+
+	min_idx = return_min_idx_or_val(stack_a, 0);
+	r_a(stack_a, &min_idx);
+	pb(stack_a, stack_b);
+	hard_coding_fourth(stack_a, stack_b);
+	pa(stack_a, stack_b);
+}
+
+void	hard_coding(t_stack *stack_a, t_stack *stack_b, int a_size)
+{
+	if (a_size <= 3)
+		hard_coding_three(stack_a);
+	else if (a_size == 4)
+		hard_coding_fourth(stack_a, stack_b);
+	else if (a_size == 5)
+		hard_coding_fifth(stack_a, stack_b);
 }

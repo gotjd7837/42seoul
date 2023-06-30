@@ -2,7 +2,7 @@ CC=gcc
 CFLAGS=-Wall -Wextra -Werror
 SRCS=	arg_parsing.c\
 		count_ra.c\
-		first_sort_stack_b.c\
+		first_sort_stack.c\
 		handle_arg_error.c\
 		hard_coding.c\
 		instr_push.c\
@@ -16,6 +16,7 @@ SRCS=	arg_parsing.c\
 		rr_a_b.c\
 		sort_stack.c\
 		stack.c\
+		second_sort_stack.c\
 
 OBJS=$(SRCS:.c=.o)
 HEADER=./include

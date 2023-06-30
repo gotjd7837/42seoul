@@ -6,13 +6,13 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/28 11:18:08 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/29 21:15:56 by haekang          ###   ########.fr       */
+/*   Updated: 2023/06/30 16:46:00 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	return_min_idx_or_val(t_stack *stack, int sign)
+int	return_min_idx_or_val(t_stack *stack, int sign)
 {
 	int		i;
 	int		min;
@@ -28,8 +28,8 @@ static int	return_min_idx_or_val(t_stack *stack, int sign)
 			min = node->content;
 			min_idx = i;
 		}
-		i++;
 		node = node->next;
+		i++;
 	}
 	if (sign == 0)
 	{

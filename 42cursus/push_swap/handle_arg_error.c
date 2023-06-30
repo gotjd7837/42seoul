@@ -6,13 +6,13 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 20:51:02 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/28 17:15:58 by haekang          ###   ########.fr       */
+/*   Updated: 2023/06/30 20:15:21 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	arr_duplicates_checker(int *arr, int size)
+static void	arr_duplicates_checker(int *arr, int size)
 {
 	int	i;
 	int	j;
@@ -31,7 +31,7 @@ void	arr_duplicates_checker(int *arr, int size)
 	}
 }
 
-void	arr_sort_checker(int *arr, int size)
+static void	arr_sort_checker(int *arr, int size)
 {
 	int	i;
 
@@ -42,7 +42,7 @@ void	arr_sort_checker(int *arr, int size)
 			return ;
 		i++;
 	}
-	print_error(0);
+	print_error(1);
 }
 
 void	handle_arg_error(int *stack_data, int size)
