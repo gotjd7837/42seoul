@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 20:51:02 by haekang           #+#    #+#             */
-/*   Updated: 2023/07/04 09:17:01 by haekang          ###   ########.fr       */
+/*   Updated: 2023/07/04 12:19:53 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static void	arr_sort_checker(int *arr, int size)
 	}
 	print_error(1);
 }
-
 
 static void	arr_duplicates_checker(int *arr, int size)
 {
