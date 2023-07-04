@@ -6,11 +6,38 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 20:46:24 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/30 20:08:47 by haekang          ###   ########.fr       */
+/*   Updated: 2023/07/04 10:45:00 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static void	stack_free(t_stack *stack)
+{
+	int		i;
+	t_node	*node;
+	t_node	*tmp;
+
+	i = 0;
+	node = stack->top->next;
+	while (i < stack->size)
+	{
+		tmp = node->next;
+		free(node);
+		node = tmp;
+		i++;
+	}
+	free(stack->top);
+	free(stack->bottom);
+	free(stack);
+}
+
+static void	push_swap_free(int *sorted_data, t_stack *stack_a, t_stack *stack_b)
+{
+	free(sorted_data);
+	stack_free(stack_a);
+	stack_free(stack_b);
+}
 
 int	main(int ac, char *av[])
 {
@@ -26,9 +53,11 @@ int	main(int ac, char *av[])
 		if (stack_a->size <= 5)
 		{
 			hard_coding(stack_a, stack_b, stack_a->size);
+			push_swap_free(sorted_data, stack_a, stack_b);
 			return (0);
 		}
 		sort_stack(stack_a, stack_b, sorted_data);
+		push_swap_free(sorted_data, stack_a, stack_b);
 	}
 	else
 		print_error(1);

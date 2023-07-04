@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:50:11 by haekang           #+#    #+#             */
-/*   Updated: 2023/06/30 20:43:06 by haekang          ###   ########.fr       */
+/*   Updated: 2023/07/04 10:21:37 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ static void	parse(t_stack *stack, char **split)
 			print_error(0);
 		node = new_node(arg);
 		push_bottom_stack(stack, node);
+		free(split[i]);
 		i++;
 	}
 }
@@ -87,6 +88,7 @@ int	*arg_parsing(t_stack *stack, int ac, char *av[])
 	{
 		split = ft_split(av[i], ' ');
 		parse(stack, split);
+		free(split);
 		i++;
 	}
 	if (stack->size == 0)
