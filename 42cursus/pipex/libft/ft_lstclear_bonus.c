@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/04 15:36:31 by haekang           #+#    #+#             */
-/*   Updated: 2023/07/05 14:58:05 by haekang          ###   ########.fr       */
+/*   Created: 2023/04/06 17:54:07 by haekang           #+#    #+#             */
+/*   Updated: 2023/04/07 16:33:32 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include <unistd.h>
-
-typedef struct s_pipex
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-    
-}   t_pipex
+	t_list	*node;
+	t_list	*next;
 
-#endif
+	if (lst == NULL || *lst == NULL)
+		return ;
+	node = *lst;
+	next = node->next;
+	while (node != NULL)
+	{
+		ft_lstdelone(node, (*del));
+		node = next;
+		if (node != NULL)
+			next = node->next;
+	}
+	*lst = NULL;
+}

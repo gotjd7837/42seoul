@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/04 15:36:31 by haekang           #+#    #+#             */
-/*   Updated: 2023/07/05 14:58:05 by haekang          ###   ########.fr       */
+/*   Created: 2023/04/06 00:41:28 by haekang           #+#    #+#             */
+/*   Updated: 2023/04/06 21:56:53 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include <unistd.h>
-
-typedef struct s_pipex
+t_list	*ft_lstnew(void *content)
 {
-    
-}   t_pipex
+	t_list	*new_node;
 
-#endif
+	new_node = (t_list *)malloc(sizeof(t_list));
+	if (new_node == NULL)
+		return (NULL);
+	if (content == NULL)
+	{
+		new_node->content = NULL;
+		new_node->next = NULL;
+	}
+	new_node->content = content;
+	new_node->next = NULL;
+	return (new_node);
+}

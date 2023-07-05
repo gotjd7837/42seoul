@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/04 15:36:31 by haekang           #+#    #+#             */
-/*   Updated: 2023/07/05 14:58:05 by haekang          ###   ########.fr       */
+/*   Created: 2023/04/03 09:04:19 by haekang           #+#    #+#             */
+/*   Updated: 2023/04/03 09:23:18 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include <unistd.h>
-
-typedef struct s_pipex
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-    
-}   t_pipex
+	size_t			len;
+	unsigned int	i;
 
-#endif
+	if (s == NULL || f == NULL)
+		return ;
+	len = ft_strlen(s);
+	i = 0;
+	while (i < len)
+	{
+		(*f)(i, (s + i));
+		i++;
+	}
+	return ;
+}

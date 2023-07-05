@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/04 15:36:31 by haekang           #+#    #+#             */
-/*   Updated: 2023/07/05 14:58:05 by haekang          ###   ########.fr       */
+/*   Created: 2023/04/03 10:06:21 by haekang           #+#    #+#             */
+/*   Updated: 2023/04/09 17:29:01 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include <unistd.h>
-
-typedef struct s_pipex
+void	ft_putstr_fd(char *s, int fd)
 {
-    
-}   t_pipex
+	size_t	i;
+	size_t	len;
 
-#endif
+	i = 0;
+	len = ft_strlen(s);
+	if (fd < 0 || s == NULL)
+		return ;
+	while (i < len)
+		write(fd, (s + i++), 1);
+}

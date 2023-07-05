@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/04 15:36:31 by haekang           #+#    #+#             */
-/*   Updated: 2023/07/05 14:58:05 by haekang          ###   ########.fr       */
+/*   Created: 2023/04/03 10:12:10 by haekang           #+#    #+#             */
+/*   Updated: 2023/04/09 17:15:04 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "libft.h"
 
-# include <unistd.h>
-
-typedef struct s_pipex
+void	ft_putendl_fd(char *s, int fd)
 {
-    
-}   t_pipex
-
-#endif
+	ft_putstr_fd(s, fd);
+	write(fd, "\n", 1);
+}

@@ -3,6 +3,7 @@ CFLAGS=-Wall -Wextra -Werror
 SRCS=
 OBJS=$(SRCS:.c=.o)
 HAEDER=./
+LIBFT_DIR=./libft
 NAME=pipex
 
 .PHONY: all clean fclean re
@@ -10,7 +11,8 @@ NAME=pipex
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $^ -I$(HAEDER)
+	make -C $(LIBFT_DIR)
+	$(CC) $(CFLAGS) -o $@ $^ $(LIBFT_DIR)/libft.a
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c -o $@ $^ -I$(HEADER)
