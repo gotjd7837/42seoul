@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   print_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/04 15:36:31 by haekang           #+#    #+#             */
-/*   Updated: 2023/07/09 21:40:24 by haekang          ###   ########.fr       */
+/*   Created: 2023/07/06 15:37:19 by haekang           #+#    #+#             */
+/*   Updated: 2023/07/09 21:35:24 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "pipex.h"
 
-# include "./libft/libft.h"
-
-typedef struct s_pipex
+void	print_error(char *str)
 {
-    int infile;
-    int outfile;
-    int pipefd[2];
-    char    **cmd1;
-    char    **cmd2;
-    char    **path;
-    char    *path_cmd1;
-    char    *path_cmd2;
-    
-}       t_pipex;
+	size_t	i;
+	size_t	len;
 
-void	print_error(char *str);
-
-#endif
+	i = 0;
+	len = ft_strlen(str);
+	if (str == NULL)
+		return ;
+	while (i < len)
+		write(1, (str + i++), 1);
+	exit(1);
+}
