@@ -1,0 +1,10 @@
+Makefile
+a.out
+gpt.c
+infile
+libft
+libft.a
+main.c
+outfile
+pipex.h
+print_error.c

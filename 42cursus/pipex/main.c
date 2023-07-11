@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:37:31 by haekang           #+#    #+#             */
-/*   Updated: 2023/07/09 21:52:46 by haekang          ###   ########.fr       */
+/*   Updated: 2023/07/11 19:00:23 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_pipex	*init_info(char **av, char **envp)
 	info->cmd2 = ft_split(av[3], ' ');
 	info->path = find_path(envp);
 	info->path_cmd1 = find_path_cmd(info->path, info->cmd1[0]);
-	info->path_cmd1 = find_path_cmd(info->path, info->cmd2[0]);
+	info->path_cmd2 = find_path_cmd(info->path, info->cmd2[0]);
 	return (info);
 }
 
@@ -96,17 +96,22 @@ int	main(int ac, char **av, char **envp)
 		dup2(info->pipefd[1], STDOUT_FILENO);
 		close(info->infile);
 		close(info->pipefd[1]);
+		close(info->outfile);
 		execve(info->path_cmd1, info->cmd1, envp);
 	}
+	close(info->pipefd[1]);
 	pid2 = fork();
 	if (pid2 == 0)
 	{
-		close(info->pipefd[1]);
 		dup2(info->pipefd[0], STDIN_FILENO);
 		dup2(info->outfile, STDOUT_FILENO);
 		close(info->pipefd[0]);
 		close(info->outfile);
+		close(info->infile);
 		execve(info->path_cmd2, info->cmd2, envp);
 	}
+	while (wait(NULL) != -1)
+		;
+	close(info->pipefd[0]);
 	return (0);
 }
