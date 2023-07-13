@@ -1,6 +1,8 @@
 CC=gcc
 CFLAGS=-Wall -Wextra -Werror
-SRCS=
+SRCS=	main.c\
+		init_info.c\
+		print_error.c
 OBJS=$(SRCS:.c=.o)
 HAEDER=./
 LIBFT_DIR=./libft
@@ -15,14 +17,15 @@ $(NAME) : $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBFT_DIR)/libft.a
 
 %.o : %.c
-	$(CC) $(CFLAGS) -c -o $@ $^ -I$(HEADER)
+	$(CC) $(CFLAGS) -c -o $@ $^ -I$(HAEDER)
 
 clean :
+	make -C $(LIBFT_DIR) clean
 	rm -f $(OBJS)
 
 fclean :
-	make clean
-	rm -f $(NAME)
+	make -C $(LIBFT_DIR) fclean
+	rm -f $(OBJS) $(NAME)
 
 re :
 	make fclean
