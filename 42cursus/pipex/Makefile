@@ -1,7 +1,7 @@
-CC=gcc
+CC=cc
 CFLAGS=-Wall -Wextra -Werror
 SRCS=	main.c\
-		init_info.c\
+		set_info.c\
 		print_error.c
 OBJS=$(SRCS:.c=.o)
 HAEDER=./

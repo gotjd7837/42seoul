@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 15:36:31 by haekang           #+#    #+#             */
-/*   Updated: 2023/07/13 18:38:37 by haekang          ###   ########.fr       */
+/*   Updated: 2023/07/14 19:19:29 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ typedef struct s_pipex
 
 void	print_error(char *str);
 
-t_pipex	*init_info(char **av, char **envp);
+t_pipex	*set_info(char **av, char **envp);
 
 #endif
