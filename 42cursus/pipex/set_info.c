@@ -6,39 +6,11 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 18:20:04 by haekang           #+#    #+#             */
-/*   Updated: 2023/07/14 20:49:36 by haekang          ###   ########.fr       */
+/*   Updated: 2023/07/15 03:48:21 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-static char	*find_cmd_path(char **path, char *cmd)
-{
-	int		i;
-	char	*slash_cmd;
-	char	*path_cmd;
-
-	if (access(cmd, X_OK) == 0)
-		return (cmd);
-	else
-		
-	i = 0;
-	slash_cmd = ft_strjoin("/", cmd);
-	if (slash_cmd == NULL)
-		return (NULL);
-	while (path[i] != NULL)
-	{
-		path_cmd = ft_strjoin(path[i], slash_cmd);
-		if (access(path_cmd, X_OK) == 0)
-		{
-			free(slash_cmd);
-			return (path_cmd);
-		}
-		free(path_cmd);
-		i++;
-	}
-	return (NULL);
-}
 
 static char	**find_path(char **envp)
 {
@@ -57,7 +29,7 @@ static char	**find_path(char **envp)
 			path = envp[i] + path_len;
 			result = ft_split(path, ':');
 			if (result == NULL)
-				print_error("malloc error");
+				perror_and_exit("malloc error");
 			return (result);
 		}
 		i++;
@@ -71,21 +43,23 @@ t_pipex	*set_info(char **av, char **envp)
 
 	info = (t_pipex *)malloc(sizeof(t_pipex));
 	if (info == NULL)
-		print_error("malloc error");
+		perror_and_exit("malloc error");
 	info->infile = open(av[1], O_RDONLY);
+	if (info->infile == -1)
+		perror_and_exit("infile error");
 	info->outfile = open(av[4], O_RDWR | O_CREAT | O_TRUNC, 0644);
+	if (info->infile == -1)
+		perror_and_exit("infile error");
 	if (pipe(info->pipefd) == -1)
-		print_error("pipe create fail");
-	info->cmd1 = ft_split(av[2], ' ');
-	if (info->cmd1 == NULL)
-		print_error("malloc error");
-	info->cmd2 = ft_split(av[3], ' ');
-	if (info->cmd2 == NULL)
-		print_error("malloc error");
+		perror_and_exit("pipe create fail");
+	info->cmd1_av = ft_split(av[2], ' ');
+	if (info->cmd1_av == NULL)
+		perror_and_exit("malloc error");
+	info->cmd2_av = ft_split(av[3], ' ');
+	if (info->cmd2_av == NULL)
+		perror_and_exit("malloc error");
 	info->path = find_path(envp);
 	if (info->path == NULL)
-		print_error("PATH not found");
-	info->path_cmd1 = find_cmd_path(info->path, info->cmd1[0]);
-	info->path_cmd2 = find_cmd_path(info->path, info->cmd2[0]);
+		perror_and_exit("malloc error");
 	return (info);
 }
