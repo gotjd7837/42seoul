@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 18:20:04 by haekang           #+#    #+#             */
-/*   Updated: 2023/07/14 20:05:44 by haekang          ###   ########.fr       */
+/*   Updated: 2023/07/14 20:49:36 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ static char	*find_cmd_path(char **path, char *cmd)
 	char	*slash_cmd;
 	char	*path_cmd;
 
+	if (access(cmd, X_OK) == 0)
+		return (cmd);
+	else
+		
 	i = 0;
 	slash_cmd = ft_strjoin("/", cmd);
 	if (slash_cmd == NULL)
