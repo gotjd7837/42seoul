@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 18:20:04 by haekang           #+#    #+#             */
-/*   Updated: 2023/07/19 07:40:56 by haekang          ###   ########.fr       */
+/*   Updated: 2023/07/19 07:48:14 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_pipex	*set_info(char **av, char **envp)
 	info->infile = open(av[1], O_RDONLY);
 	if (info->infile == -1)
 		perror_and_exit("infile error");
-	info->outfile = open(av[4], O_RDWR | O_CREAT | O_TRUNC, 0644);
+	info->outfile = open(av[4], O_RDWR | O_CREAT | O_TRUNC, 0777);
 	if (info->outfile == -1)
 		perror_and_exit("outfile error");
 	if (pipe(info->pipefd) == -1)
