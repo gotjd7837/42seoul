@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:37:31 by haekang           #+#    #+#             */
-/*   Updated: 2023/07/19 07:04:17 by haekang          ###   ########.fr       */
+/*   Updated: 2023/07/19 07:20:16 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,12 @@ int	main(int ac, char **av, char **envp)
 		write_error_and_exit("wrong number of arguments\n");
 	info = set_info(av, envp);
 	pid1 = fork();
-	if (pid1 < 0)
+	if (pid1 == -1)
 		perror_and_exit("fork failed");
 	if (pid1 == 0)
 		first_child(info, envp);
 	pid2 = fork();
-	if (pid2 < 0)
+	if (pid2 == -1)
 		perror_and_exit("fork failed");
 	if (pid2 == 0)
 		second_child(info, envp);
