@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 15:37:31 by haekang           #+#    #+#             */
-/*   Updated: 2023/07/19 07:20:16 by haekang          ###   ########.fr       */
+/*   Updated: 2023/07/19 07:40:02 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static void	first_child(t_pipex *info, char **envp)
 {
 	char	*cmd1_path;
 
+	if (info->cmd1_av[0] == 0)
+		write_error_and_exit("permission denied\n");
 	cmd1_path = find_cmd_abspath(info->path, info->cmd1_av[0]);
 	if (cmd1_path == NULL)
 		write_error_and_exit("error cmd1: command not found\n");
@@ -44,6 +46,8 @@ static void	second_child(t_pipex *info, char **envp)
 {
 	char	*cmd2_path;
 
+	if (info->cmd2_av[0] == 0)
+		write_error_and_exit("permission denied\n");
 	cmd2_path = find_cmd_abspath(info->path, info->cmd2_av[0]);
 	if (cmd2_path == NULL)
 		write_error_and_exit("error cmd2: command not found\n");
