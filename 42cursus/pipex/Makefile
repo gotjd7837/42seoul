@@ -2,7 +2,9 @@ CC=cc
 CFLAGS=-Wall -Wextra -Werror
 SRCS=	main.c\
 		set_info.c\
-		print_error.c
+		print_error.c\
+		info_free.c\
+		find_cmd_abspath.c
 OBJS=$(SRCS:.c=.o)
 HAEDER=./
 LIBFT_DIR=./libft
