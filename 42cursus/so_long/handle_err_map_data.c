@@ -6,13 +6,13 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 18:44:25 by haekang           #+#    #+#             */
-/*   Updated: 2023/08/03 21:18:14 by haekang          ###   ########.fr       */
+/*   Updated: 2023/08/06 05:32:02 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void	check_c_p_e_map(t_info *info)
+static void	set_c_p_e_map(t_info *info)
 {
 	int	i;
 	int	j;
@@ -27,7 +27,11 @@ static void	check_c_p_e_map(t_info *info)
 		while (info->map_data[i][j])
 		{
 			if (info->map_data[i][j] == 'P')
+			{
 				info->cnt_p += 1;
+				info->x = j * 64;
+				info->y = i * 64;
+			}
 			if (info->map_data[i][j] == 'E')
 				info->cnt_e += 1;
 			if (info->map_data[i][j] == 'C')
@@ -99,12 +103,12 @@ void	handle_err_map_data(t_info *info)
 	set_max_x(info);
 	set_max_y(info);
 	check_wall_map(info);
-	check_c_p_e_map(info);
+	set_c_p_e_map(info);
 	if (info->cnt_c < 1)
 		print_and_err_exit("c가 최소한 1개는 있어야함\n");
 	if (info->cnt_e != 1)
 		print_and_err_exit("출구는 하나만 있어야함\n");
 	if (info->cnt_p != 1)
 		print_and_err_exit("플레이어는 하나만 있어야함\n");
-	//이제 경로가 유효한지 검사를 한다.
+	check_valid_path(info);
 }

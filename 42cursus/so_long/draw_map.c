@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 17:27:08 by haekang           #+#    #+#             */
-/*   Updated: 2023/08/03 17:34:13 by haekang          ###   ########.fr       */
+/*   Updated: 2023/08/06 05:47:15 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,8 @@ static void	draw_image_mid(t_info *info, char *mid_data, int line_idx)
 		}
 		else if (mid_data[i] == '0' || mid_data[i] == 'P')
 		{
-			if (mid_data[i] == 'P')
-			{
-				mid_data[i] = '0';
-				info->x = x * 64;
-				info->y = y * 64;
-			}
+			// if (mid_data[i] == 'P')
+			// 	mid_data[i] = '0';//이부분 지워도될려나
 			mlx_put_image_to_window(info->mlx, info->win, info->g, x * 64, y * 64);
 		}
 		else if (mid_data[i] == 'C')

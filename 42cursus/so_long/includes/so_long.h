@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 02:57:28 by haekang           #+#    #+#             */
-/*   Updated: 2023/08/03 21:33:05 by haekang          ###   ########.fr       */
+/*   Updated: 2023/08/06 05:09:51 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,13 @@ typedef struct s_info
 	int		win_height;
 }	t_info;
 
+typedef struct s_check
+{
+	char	**visited;
+	int		cnt_c;
+	int		cnt_e;
+}	t_check;
+
 char	*get_next_line(int fd);
 
 void	set_info(t_info *info, char *ber_file);
@@ -64,5 +71,7 @@ void	print_and_exit(char *str);
 int		key_press(int keycode, t_info *info);
 
 void	handle_err_map_data(t_info *info);
+
+void	check_valid_path(t_info *info);
 
 #endif

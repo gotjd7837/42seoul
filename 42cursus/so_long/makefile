@@ -7,6 +7,7 @@ SRCS=	main.c\
 		key_press.c\
 		handle_err_map_data.c\
 		print_and_exit.c\
+		check_valid_path.c
 
 OBJS=$(SRCS:.c=.o)
 HEADER=./includes
