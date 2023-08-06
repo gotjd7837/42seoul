@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 17:27:08 by haekang           #+#    #+#             */
-/*   Updated: 2023/08/06 17:46:10 by haekang          ###   ########.fr       */
+/*   Updated: 2023/08/06 18:58:53 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,13 @@ static void	draw_image_t_b(t_info *info, int line_idx)
 void	draw_map(t_info *info)
 {
 	int	i;
-	int	max_line_idx;
 
-	i = 0;
-	while (info->map_data[i++])
-		;
-	max_line_idx = i - 1;
 	i = 0;
 	while (info->map_data[i])
 	{
 		if (i == 0)
 			draw_image_t_b(info, i);
-		else if (i == max_line_idx)
+		else if (i == (info->max_y - 1))
 			draw_image_t_b(info, i);
 		else
 			draw_image_mid(info, i);
