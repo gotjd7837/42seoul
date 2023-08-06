@@ -6,11 +6,16 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 08:10:25 by haekang           #+#    #+#             */
-/*   Updated: 2023/08/03 21:18:37 by haekang          ###   ########.fr       */
+/*   Updated: 2023/08/06 18:42:53 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+// void	leak()
+// {
+// 	system("leaks so_long");
+// }
 
 int	draw(t_info *info)
 {
@@ -22,6 +27,7 @@ int	draw(t_info *info)
 
 int	main(int ac, char *av[])
 {
+	// atexit(leak);
 	t_info	info;
 
 	if (ac != 2)

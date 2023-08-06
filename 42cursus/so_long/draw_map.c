@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 17:27:08 by haekang           #+#    #+#             */
-/*   Updated: 2023/08/06 16:14:18 by haekang          ###   ########.fr       */
+/*   Updated: 2023/08/06 17:46:10 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,9 @@ static void	draw_image_mid(t_info *info, int line_idx)
 	while (info->map_data[y][i])
 	{
 		if (info->map_data[y][i] == '1')
-		{
-			mlx_put_image_to_window(info->mlx, info->win, info->g, x * 64, y * 64);
-			mlx_put_image_to_window(info->mlx, info->win, info->w, x * 64, y * 64);
-		}
+			draw_item_wall(info, &x, &y);
 		else if (info->map_data[y][i] == '0' || info->map_data[y][i] == 'P')
-			mlx_put_image_to_window(info->mlx, info->win, info->g, x * 64, y * 64);
+			draw_item_ground(info, &x, &y);
 		else if (info->map_data[y][i] == 'C')
 			draw_item_collections(info, &x, &y);
 		else if (info->map_data[y][i] == 'E')
@@ -50,8 +47,7 @@ static void	draw_image_t_b(t_info *info, int line_idx)
 	i = 0;
 	while (info->map_data[y][i])
 	{
-		mlx_put_image_to_window(info->mlx, info->win, info->g, x * 64, y * 64);
-		mlx_put_image_to_window(info->mlx, info->win, info->w, x * 64, y * 64);
+		draw_item_wall(info, &x, &y);
 		i++;
 		x++;
 	}

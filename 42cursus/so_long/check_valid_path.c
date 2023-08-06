@@ -6,11 +6,24 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 04:02:23 by haekang           #+#    #+#             */
-/*   Updated: 2023/08/06 05:54:45 by haekang          ###   ########.fr       */
+/*   Updated: 2023/08/06 18:40:11 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+static void	check_free(t_check *check)
+{
+	int	i;
+
+	i = 0;
+	while (check->visited[i])
+	{
+		free(check->visited[i]);
+		i++;
+	}
+	free(check->visited);
+}
 
 static void	set_check(t_info *info, t_check *check)
 {
@@ -55,4 +68,5 @@ void	check_valid_path(t_info *info)
 	dfs((info->x / 64), (info->y / 64), info, &check);
 	if (check.cnt_c != info->cnt_c || check.cnt_e != info->cnt_e)
 		print_and_err_exit("유효한 경로가 없음\n");
+	check_free(&check);
 }

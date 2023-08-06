@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 02:57:28 by haekang           #+#    #+#             */
-/*   Updated: 2023/08/06 05:09:51 by haekang          ###   ########.fr       */
+/*   Updated: 2023/08/06 18:35:11 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,10 @@ int		key_press(int keycode, t_info *info);
 void	handle_err_map_data(t_info *info);
 
 void	check_valid_path(t_info *info);
+
+void	draw_item_collections(t_info *info, int *x, int *y);
+void	draw_item_exit(t_info *info, int *x, int *y);
+void	draw_item_ground(t_info *info, int *x, int *y);
+void	draw_item_wall(t_info *info, int *x, int *y);
 
 #endif

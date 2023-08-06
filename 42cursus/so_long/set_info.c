@@ -6,11 +6,25 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 17:19:51 by haekang           #+#    #+#             */
-/*   Updated: 2023/08/03 21:34:47 by haekang          ###   ########.fr       */
+/*   Updated: 2023/08/06 18:29:45 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+static void	check_map_line(char *save)
+{
+	int	i;
+
+	i = 0;
+	while (save[i])
+	{
+		if (save[i] == '\n')
+			if (save[i + 1] == '\n')
+				print_and_err_exit("맵의 줄 사이에 줄바꿈이 있음\n");
+		i++;
+	}
+}
 
 static void	set_map_data(t_info *info)
 {
@@ -29,9 +43,10 @@ static void	set_map_data(t_info *info)
 		free(tmp);
 		free(line);
 	}
+	check_map_line(save);
 	info->map_data = ft_split(save, '\n');
+	free(save);
 	handle_err_map_data(info);
-	//맵 크기 제한 해야함 !
 	info->win = mlx_new_window(info->mlx, info->max_x * 64, \
 								info->max_y * 64, "so_long");
 }
@@ -50,6 +65,9 @@ void	set_info(t_info *info, char *ber_file)
 	info->e = mlx_xpm_file_to_image(info->mlx, "./imgs/exit.xpm", \
 									&info->wi, &info->he);
 	info->fd = open(ber_file, O_RDONLY);
+	info->cnt_c = 0;
+	info->cnt_p = 0;
+	info->cnt_e = 0;
 	info->cnt_step = 0;
 	set_map_data(info);
 }

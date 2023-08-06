@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 18:44:25 by haekang           #+#    #+#             */
-/*   Updated: 2023/08/06 05:32:02 by haekang          ###   ########.fr       */
+/*   Updated: 2023/08/06 17:10:12 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@ static void	set_c_p_e_map(t_info *info)
 	int	i;
 	int	j;
 
-	info->cnt_c = 0;
-	info->cnt_p = 0;
-	info->cnt_e = 0;
 	i = 0;
 	while (info->map_data[i])
 	{
@@ -32,10 +29,12 @@ static void	set_c_p_e_map(t_info *info)
 				info->x = j * 64;
 				info->y = i * 64;
 			}
-			if (info->map_data[i][j] == 'E')
+			else if (info->map_data[i][j] == 'E')
 				info->cnt_e += 1;
-			if (info->map_data[i][j] == 'C')
+			else if (info->map_data[i][j] == 'C')
 				info->cnt_c += 1;
+			else if (info->map_data[i][j] != '1' && info->map_data[i][j] != '0')
+				print_and_err_exit("잘못된 맵 인자가 들어옴\n");
 			j++;
 		}
 		i++;
@@ -58,14 +57,14 @@ static void	check_wall_map(t_info *info)
 			while (info->map_data[i][j])
 			{
 				if (info->map_data[i][j] != '1')
-					print_and_err_exit("탑이나 바텀이 벽이 아님 ;;\n");
+					print_and_err_exit("탑이나 바텀이 벽이 아님\n");
 				j++;
 			}
 		}
 		else
 			if (info->map_data[i][0] != '1' || \
 				info->map_data[i][info->max_x - 1] != '1')
-				print_and_err_exit("맵 미드의 양 끝이 벽이 아닌게 있음 ;;\n");
+				print_and_err_exit("맵 미드의 양 끝이 벽이 아닌게 있음\n");
 		i++;
 	}
 }
@@ -92,7 +91,7 @@ static void	set_max_x(t_info *info)
 	{
 		max_x = ft_strlen(info->map_data[i]);
 		if (tmp != max_x)
-			print_and_err_exit("맵 사이에 줄바꿈이 있거나 가로 길이가 다름 !\n");
+			print_and_err_exit("입력 받은 맵의 가로 길이가 다름\n");
 		i++;
 	}
 	info->max_x = max_x;
