@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 17:40:40 by haekang           #+#    #+#             */
-/*   Updated: 2023/08/06 18:35:35 by haekang          ###   ########.fr       */
+/*   Updated: 2023/08/07 21:16:41 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,15 @@ static void	press_d(t_info *info, int x_idx, int y_idx)
 	{
 		info->map_data[y_idx][x_idx + 1] = '0';
 		info->cnt_c -= 1;
+		ft_printf(">수집품 획득 !\n 남은 수집품 : %d개\n", info->cnt_c);
 	}
 	if (info->map_data[y_idx][x_idx + 1] == 'E')
+	{
 		if (info->cnt_c == 0)
-			print_and_exit("탈출 완료 !!\n");
+			print_and_exit(">탈출 성공 !!\n");
+		else
+			ft_printf(">수집품을 더 수집해야 탈출 할 수 있습니다.\n");
+	}
 	info->x += info->wi;
 	info->cnt_step += 1;
 	ft_printf("걸음 수 : %d\n", info->cnt_step);
@@ -33,10 +38,15 @@ static void	press_a(t_info *info, int x_idx, int y_idx)
 	{
 		info->map_data[y_idx][x_idx - 1] = '0';
 		info->cnt_c -= 1;
+		ft_printf(">수집품 획득 !\n 남은 수집품 : %d개\n", info->cnt_c);
 	}
 	if (info->map_data[y_idx][x_idx - 1] == 'E')
+	{
 		if (info->cnt_c == 0)
-			print_and_exit("탈출 완료 !!\n");
+			print_and_exit(">탈출 성공 !!\n");
+		else
+			ft_printf(">수집품을 더 수집해야 탈출 할 수 있습니다.\n");
+	}
 	info->x -= info->wi;
 	info->cnt_step += 1;
 	ft_printf("걸음 수 : %d\n", info->cnt_step);
@@ -48,10 +58,15 @@ static void	press_s(t_info *info, int x_idx, int y_idx)
 	{
 		info->map_data[y_idx + 1][x_idx] = '0';
 		info->cnt_c -= 1;
+		ft_printf(">수집품 획득 !\n 남은 수집품 : %d개\n", info->cnt_c);
 	}
 	if (info->map_data[y_idx + 1][x_idx] == 'E')
+	{
 		if (info->cnt_c == 0)
-			print_and_exit("탈출 완료 !!\n");
+			print_and_exit(">탈출 성공 !!\n");
+		else
+			ft_printf(">수집품을 더 수집해야 탈출 할 수 있습니다.\n");
+	}
 	info->y += info->he;
 	info->cnt_step += 1;
 	ft_printf("걸음 수 : %d\n", info->cnt_step);
@@ -63,10 +78,15 @@ static void	press_w(t_info *info, int x_idx, int y_idx)
 	{
 		info->map_data[y_idx - 1][x_idx] = '0';
 		info->cnt_c -= 1;
+		ft_printf(">수집품 획득 !\n 남은 수집품 : %d개\n", info->cnt_c);
 	}
 	if (info->map_data[y_idx - 1][x_idx] == 'E')
+	{
 		if (info->cnt_c == 0)
-			print_and_exit("탈출 완료 !!\n");
+			print_and_exit(">탈출 성공 !!\n");
+		else
+			ft_printf(">수집품을 더 수집해야 탈출 할 수 있습니다.\n");
+	}
 	info->y -= info->he;
 	info->cnt_step += 1;
 	ft_printf("걸음 수 : %d\n", info->cnt_step);
@@ -88,6 +108,7 @@ int	key_press(int keycode, t_info *info)
 	else if (keycode == KEY_D && info->map_data[y_idx][x_idx + 1] != '1')
 		press_d(info, x_idx, y_idx);
 	else if (keycode == KEY_ESC)
-		print_and_exit("프로그램 종료\n");
+		print_and_exit(">프로그램 종료\n");
+	draw(info);
 	return (0);
 }

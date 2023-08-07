@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 04:02:23 by haekang           #+#    #+#             */
-/*   Updated: 2023/08/06 18:40:11 by haekang          ###   ########.fr       */
+/*   Updated: 2023/08/07 16:25:12 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,6 @@ void	check_valid_path(t_info *info)
 	set_check(info, &check);
 	dfs((info->x / 64), (info->y / 64), info, &check);
 	if (check.cnt_c != info->cnt_c || check.cnt_e != info->cnt_e)
-		print_and_err_exit("유효한 경로가 없음\n");
+		print_and_err_exit("Error\n>유효한 경로가 없음\n");
 	check_free(&check);
 }

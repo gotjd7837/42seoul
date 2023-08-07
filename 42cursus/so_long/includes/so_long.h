@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 02:57:28 by haekang           #+#    #+#             */
-/*   Updated: 2023/08/06 18:35:11 by haekang          ###   ########.fr       */
+/*   Updated: 2023/08/07 16:14:37 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,16 @@
 # include "./ft_printf/ft_printf.h"
 # include "mlx/mlx.h"
 # include <fcntl.h>
-# include <stdio.h>//ㅈㅣ우ㅓ야함
 
-# define BUFFER_SIZE 1
+# define BUFFER_SIZE 		1
 # define KEY_ESC			53
 # define KEY_W				13
 # define KEY_S				1
 # define KEY_A				0
 # define KEY_D				2
 # define PRESS_RED_BUTTON	17
+# define WIN_MAX_X			40
+# define WIN_MAX_Y			21
 
 typedef struct s_info
 {
@@ -63,6 +64,7 @@ char	*get_next_line(int fd);
 
 void	set_info(t_info *info, char *ber_file);
 
+int		draw(t_info *info);
 void	draw_map(t_info *info);
 
 void	print_and_err_exit(char *str);
