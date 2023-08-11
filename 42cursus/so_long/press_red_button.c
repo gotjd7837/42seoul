@@ -6,14 +6,14 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 10:28:47 by haekang           #+#    #+#             */
-/*   Updated: 2023/08/11 10:31:12 by haekang          ###   ########.fr       */
+/*   Updated: 2023/08/11 13:40:16 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	press_red_button(void)
+int	press_red_button(t_info *info)
 {
-	print_and_exit(">프로그램 종료\n");
+	print_and_exit(">프로그램 종료\n", info);
 	return (0);
 }
