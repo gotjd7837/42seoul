@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 17:27:08 by haekang           #+#    #+#             */
-/*   Updated: 2023/08/06 18:58:53 by haekang          ###   ########.fr       */
+/*   Updated: 2023/08/11 09:52:25 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	draw_image_t_b(t_info *info, int line_idx)
 	}
 }
 
-void	draw_map(t_info *info)
+static void	draw_map(t_info *info)
 {
 	int	i;
 
@@ -68,4 +68,11 @@ void	draw_map(t_info *info)
 			draw_image_mid(info, i);
 		i++;
 	}
+}
+
+int	draw(t_info *info)
+{
+	draw_map(info);
+	mlx_put_image_to_window(info->mlx, info->win, info->p, info->x, info->y);
+	return (0);
 }

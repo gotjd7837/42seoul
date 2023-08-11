@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 17:40:40 by haekang           #+#    #+#             */
-/*   Updated: 2023/08/07 21:16:41 by haekang          ###   ########.fr       */
+/*   Updated: 2023/08/11 10:09:24 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ static void	press_d(t_info *info, int x_idx, int y_idx)
 		if (info->cnt_c == 0)
 			print_and_exit(">탈출 성공 !!\n");
 		else
+		{
 			ft_printf(">수집품을 더 수집해야 탈출 할 수 있습니다.\n");
+			ft_printf(" 남은 수집품 : %d개\n", info->cnt_c);
+		}
 	}
 	info->x += info->wi;
 	info->cnt_step += 1;
@@ -45,7 +48,10 @@ static void	press_a(t_info *info, int x_idx, int y_idx)
 		if (info->cnt_c == 0)
 			print_and_exit(">탈출 성공 !!\n");
 		else
+		{
 			ft_printf(">수집품을 더 수집해야 탈출 할 수 있습니다.\n");
+			ft_printf(" 남은 수집품 : %d개\n", info->cnt_c);
+		}
 	}
 	info->x -= info->wi;
 	info->cnt_step += 1;
@@ -65,7 +71,10 @@ static void	press_s(t_info *info, int x_idx, int y_idx)
 		if (info->cnt_c == 0)
 			print_and_exit(">탈출 성공 !!\n");
 		else
+		{
 			ft_printf(">수집품을 더 수집해야 탈출 할 수 있습니다.\n");
+			ft_printf(" 남은 수집품 : %d개\n", info->cnt_c);
+		}
 	}
 	info->y += info->he;
 	info->cnt_step += 1;
@@ -85,7 +94,10 @@ static void	press_w(t_info *info, int x_idx, int y_idx)
 		if (info->cnt_c == 0)
 			print_and_exit(">탈출 성공 !!\n");
 		else
+		{
 			ft_printf(">수집품을 더 수집해야 탈출 할 수 있습니다.\n");
+			ft_printf(" 남은 수집품 : %d개\n", info->cnt_c);
+		}
 	}
 	info->y -= info->he;
 	info->cnt_step += 1;

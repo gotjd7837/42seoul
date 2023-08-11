@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 02:57:28 by haekang           #+#    #+#             */
-/*   Updated: 2023/08/07 16:14:37 by haekang          ###   ########.fr       */
+/*   Updated: 2023/08/11 10:30:17 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,13 @@ char	*get_next_line(int fd);
 void	set_info(t_info *info, char *ber_file);
 
 int		draw(t_info *info);
-void	draw_map(t_info *info);
 
 void	print_and_err_exit(char *str);
 void	print_and_exit(char *str);
 
 int		key_press(int keycode, t_info *info);
+
+int		press_red_button(void);
 
 void	handle_err_map_data(t_info *info);
 

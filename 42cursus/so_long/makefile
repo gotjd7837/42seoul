@@ -1,10 +1,11 @@
-CC=gcc
+CC=cc
 CFLAGS=-Wall -Wextra -Werror
 SRCS=	main.c\
 		get_next_line.c\
 		set_info.c\
-		draw_map.c\
+		draw.c\
 		key_press.c\
+		press_red_button.c\
 		handle_err_map_data.c\
 		print_and_exit.c\
 		check_valid_path.c\
