@@ -1,94 +1,76 @@
 #include <stdio.h>
-#include <assert.h>
+#include <stdlib.h>
 #include <pthread.h>
-#include <semaphore.h>
-#define NUM_PHILOSOPHER 5
-#define HUNGRY 0;
-#define THINKING 1;
+#include <unistd.h>
+#include <string.h>
+#include <sys/time.h>
 
-int state[NUM_PHILOSOPHER];
+#define NUM_PHILOSOPHERS 5
 
-typedef struct _chopstick_t {
-	int value;
-	pthread_mutex_t lock;
-	pthread_cond_t cond;
-} chopstick_t;
+typedef struct {
+    pthread_mutex_t forks[NUM_PHILOSOPHERS];
+    int philosopher_id;
+} PhilosopherData;
 
-chopstick_t chopstick[NUM_PHILOSOPHER];
+void *philosopher(void *arg) {
+    PhilosopherData *data = (PhilosopherData *)arg;
+    int philosopher_id = data->philosopher_id;
+    int left_fork = philosopher_id;
+    int right_fork = (philosopher_id + 1) % NUM_PHILOSOPHERS;
 
-void chopstick_init(chopstick_t *c, int value) {
-	c->value = value;
-	pthread_mutex_init(&c->lock, NULL);
-	pthread_cond_init(&c->cond, NULL);
+    while (1) {
+        // Think
+        printf("Philosopher %d is thinking...\n", philosopher_id);
+        usleep(rand() % 2000000);
+
+        // Pick up forks
+        pthread_mutex_lock(&data->forks[left_fork]);
+        printf("Philosopher %d picked up fork %d (left)\n", philosopher_id, left_fork);
+        pthread_mutex_lock(&data->forks[right_fork]);
+        printf("Philosopher %d picked up fork %d (right)\n", philosopher_id, right_fork);
+
+        // Eat
+        printf("Philosopher %d is eating...\n", philosopher_id);
+        usleep(rand() % 2000000);
+
+        // Put down forks
+        pthread_mutex_unlock(&data->forks[right_fork]);
+        printf("Philosopher %d put down fork %d (right)\n", philosopher_id, right_fork);
+        pthread_mutex_unlock(&data->forks[left_fork]);
+        printf("Philosopher %d put down fork %d (left)\n", philosopher_id, left_fork);
+    }
+
+    return NULL;
 }
 
-void chopstick_wait(chopstick_t *c) {
-	pthread_mutex_lock(&c->lock);
-	while(c->value <= 0) {
-		pthread_cond_wait(&c->cond, &c->lock);
-	}
-	c->value--;
-	pthread_mutex_unlock(&c->lock);
-}
+int main() {
+    pthread_t philosophers[NUM_PHILOSOPHERS];
+    PhilosopherData *philosopher_data[NUM_PHILOSOPHERS];
 
-void chopstick_post(chopstick_t *c) {
-	pthread_mutex_lock(&c->lock);
-	c->value++;
-	pthread_cond_signal(&c->cond);
-	pthread_mutex_unlock(&c->lock);
-}
+    // Initialize mutexes for forks and philosopher data
+    for (int i = 0; i < NUM_PHILOSOPHERS; ++i) {
+        philosopher_data[i] = (PhilosopherData *)malloc(sizeof(PhilosopherData));
+        if (philosopher_data[i] == NULL) {
+            perror("Memory allocation error");
+            exit(EXIT_FAILURE);
+        }
 
-void get_chopstick(int philosopher) {
-	printf("philosopher %d waits for the left chopstick. \n", philosopher);
-	chopstick_wait(&chopstick[philosopher]);
-	printf("philosopher %d waits for the right chopstick. \n", philosopher);
-	chopstick_wait(&chopstick[(philosopher+1)%5]);
-	printf("philosopher %d gets the chopsticks. \n", philosopher);
-}
+        memset(philosopher_data[i], 0, sizeof(PhilosopherData));
+        pthread_mutex_init(&philosopher_data[i]->forks[i], NULL);
+        philosopher_data[i]->philosopher_id = i;
 
-void put_chopstick(int philosopher) {
-	chopstick_post(&chopstick[philosopher]);
-	chopstick_post(&chopstick[(philosopher+1)%5]);
-}
+        pthread_create(&philosophers[i], NULL, philosopher, philosopher_data[i]);
+        pthread_detach(philosophers[i]);
+    }
 
-void *philosopher(int *number) {
-	while(1) {
-		printf("philosopher %d thinks \n", (int *) number);
-		loop(1000000);
-		get_chopstick((int *) number);
-		printf("philosopher %d eats \n", (int *) number);
-		loop(1000000);
-		put_chopstick((int *) number);
-		loop(1000000);
-	}
-}
+    // Let the philosophers run for a while
+    usleep(10000000); // Run for approximately 10 seconds
 
+    // Clean up
+    for (int i = 0; i < NUM_PHILOSOPHERS; ++i) {
+        pthread_mutex_destroy(&philosopher_data[i]->forks[i]);
+        free(philosopher_data[i]);
+    }
 
-void test(int i) {
-	if(state[i+1]==0 && state[i]!=1 && state[i+2]!=1) {
-		state[i+1]=1;
-	}
-}
-void loop(int count) {
-	for(int i=0; i<count; i++);
-}
-
-int main(int argc, char *argv[]) {
-	for(int i=0; i<NUM_PHILOSOPHER; i++) {
-		chopstick_init(&chopstick[i], 1);
-	}
-	
-	pthread_t p[NUM_PHILOSOPHER];
-	
-	printf("[main begin] \n");
-	for(int i=0; i<NUM_PHILOSOPHER; i++) {
-		pthread_create(&p[i], NULL, philosopher, i);
-	}
-	
-	for(int i=0; i<NUM_PHILOSOPHER; i++) {
-		pthread_join(p[i], NULL);
-	}
-	printf("[main end] \n");
-	
-	return 0;
+    return 0;
 }
