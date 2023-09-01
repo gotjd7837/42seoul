@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 01:28:26 by haekang           #+#    #+#             */
-/*   Updated: 2023/08/31 11:13:17 by haekang          ###   ########.fr       */
+/*   Updated: 2023/09/01 20:53:40 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 typedef struct s_data
 {
-	int				philo_num;
+	int				num_of_philo;
 	uint64_t		time_to_die;
 	uint64_t		time_to_eat;
 	uint64_t		time_to_sleep;
-	int				minimum_eat_num;
+	int				philo_must_eat;
 	int				finished_ph;
-	int				die;
+	int				philo_die;
 	pthread_mutex_t	*forks;
 }		t_data;
 
@@ -34,24 +34,33 @@ typedef struct s_philo
 	pthread_mutex_t		l_fork;
 	pthread_mutex_t		r_fork;
 	int					eat_cnt;
-	// u_int64_t	last_eat
 }		t_philo;
+
+long long	get_time(void)
+{
+	struct timeval	mytime;
+
+	if (gettimeofday(&mytime, NULL) == -1)
+		return (-1);
+	return ((mytime.tv_sec * 1000) + (mytime.tv_usec / 1000));
+}
 
 void	start_eat(t_philo *philo)
 {
-	pthread_mutex_lock(philo->l_fork);
+	pthread_mutex_lock(&philo->l_fork);
 	printf("포크 집음\n");
-	pthread_mutex_lock(philo->r_fork);
+	pthread_mutex_lock(&philo->r_fork);
 	printf("포크 집음\n");
-	philo->death_time = philo->data->time_to_die + get_time();
 	printf("이 철학자가 식사중\n");
+	philo->death_time = get_time() + philo->data->time_to_eat
+		+ philo->data->time_to_die;
 	philo->eat_cnt++;
-	//주어진 시간만큼 식사한다
-	pthread_mutex_unlock(philo->l_fork);
+	//주어진 시간만큼 식사 할수있게 딜레이 걸어줘야함
+	pthread_mutex_unlock(&philo->l_fork);
 	printf("포크 내려놓음\n");
-	pthread_mutex_unlock(philo->r_fork);
+	pthread_mutex_unlock(&philo->r_fork);
 	printf("포크 내려놓음\n");
-	//주어진 시간만큼 쳐잔다
+	//주어진 시간만큼 쳐잘 수 있게 딜레이 걸어줘야함
 }
 
 void	*master(void *someone_pointer)
@@ -59,21 +68,23 @@ void	*master(void *someone_pointer)
 	t_philo	*philo;
 
 	philo = (t_philo *)someone_pointer;
-	while (philo->data->die == 0)
+	while (philo->data->philo_die == 0)
 	{
 		if (get_time() >= philo->death_time)
 		{
 			printf("이 철학자 죽음\n");
-			philo->data->die = 1;
+			philo->data->philo_die = 1;
+			break ;
 		}
-		if (philo->eat_cnt == philo->data->minimum_eat_num)
+		if (philo->eat_cnt == philo->data->philo_must_eat)
 		{
 			// philo->eat_cnt++;
+			philo->eat_cnt++;
 			philo->data->finished_ph++;
 			//다먹음 ㅇㅇ
 		}
-		if (philo->data->finished_ph == philo->data->philo_num)
-			philo->data->die = 1;//만약 모든 철학자가 다먹었으면 다 죽여서 시뮬레이션 종료
+		if (philo->data->finished_ph == philo->data->num_of_philo)
+			philo->data->philo_die = 1;//만약 모든 철학자가 다먹었으면 다 죽여서 시뮬레이션 종료
 	}
 }
 
@@ -84,11 +95,11 @@ void	*ph_sit(void *someone_pointer)
 	philo = (t_philo *)someone_pointer;
 	philo->death_time = philo->data->time_to_die + get_time();
 	if (pthread_create(&(philo->master_tid), NULL, master, (void *)philo))
-		return ;
-	while (philo->data->die == 0)
+		return ((void *)1);
+	while (philo->data->philo_die == 0)
 		start_eat(philo);
 	if (pthread_join(philo->master_tid, NULL))
-		return ;
+		return ((void *)1);
 }
 
 int	start(t_data *data, t_philo *philo)
@@ -96,13 +107,14 @@ int	start(t_data *data, t_philo *philo)
 	int	i;
 
 	i = 0;
-	while (i < data->philo_num)
+	while (i < data->num_of_philo)
 	{
-		if (pthread_create(&(philo[i].tid), NULL, ph_sit, (void *)&philo[i]))
+		if (pthread_create(&(philo[i].tid), NULL, ph_sit, (void *)&(philo[i])))
+			return (1);
 		i++;
 	}
 	i = 0;
-	while (i < data->philo_num)
+	while (i < data->num_of_philo)
 	{
 		if (pthread_join(philo[i].tid, NULL))
 			return (1);
@@ -111,23 +123,24 @@ int	start(t_data *data, t_philo *philo)
 	return (0);
 }
 
-int	init_philo(t_data *data, t_philo *philo)
+int	init_philo(t_data *data, t_philo **philo)
 {
 	int	i;
 
 	i = 0;
-	philo = (t_philo *)malloc(sizeof(t_philo) * data->philo_num);
-	if (!philo)
+	*philo = (t_philo *)malloc(sizeof(t_philo) * data->num_of_philo);
+	if (!*philo)
 		return (1);
-	while (i < data->philo_num)
+	while (i < data->num_of_philo)
 	{
-		philo[i].data = data;
-		philo[i].id = i;
-		philo[i].l_fork = data->forks[i];
-		philo[i].r_fork = data->forks[(i + 1) % data->philo_num];
-		philo[i].eat_cnt = 0;
+		(*philo)[i].data = data;
+		(*philo)[i].id = i;
+		(*philo)[i].l_fork = data->forks[i];
+		(*philo)[i].r_fork = data->forks[(i + 1) % data->num_of_philo];
+		(*philo)[i].eat_cnt = 0;
 		i++;
 	}
+	printf("dsf\n");
 	return (0);
 }
 
@@ -136,18 +149,18 @@ int	set_data(t_data *data, int ac, char *av[])
 	int	i;
 
 	i = 0;
-	data->philo_num = ft_atoi(av[1]);
+	data->num_of_philo = ft_atoi(av[1]);
 	data->time_to_die = (uint64_t)ft_atoi(av[2]);
 	data->time_to_eat = (uint64_t)ft_atoi(av[3]);
 	data->time_to_sleep = (uint64_t)ft_atoi(av[4]);
 	if (ac == 6)
-		data->minimum_eat_num = ft_atoi(av[5]);
+		data->philo_must_eat = ft_atoi(av[5]);
 	else if (ac == 5)
-		data->minimum_eat_num = -1;
-	data->forks = malloc(sizeof(pthread_mutex_t *) * data->philo_num);
+		data->philo_must_eat = -1;
+	data->forks = malloc(sizeof(pthread_mutex_t) * data->num_of_philo);
 	if (!(data->forks))
 		return (1);
-	while (i < data->philo_num)
+	while (i < data->num_of_philo)
 	{
 		if (pthread_mutex_init(&(data->forks)[i++], NULL))
 			return (1);
@@ -165,7 +178,7 @@ int	main(int ac, char *av[])
 	memset(&data, 0, sizeof(t_data));
 	if (set_data(&data, ac, av))
 		return (1);
-	if (init_philo(&data, philo))
+	if (init_philo(&data, &philo))
 		return (1);
 	if (start(&data, philo))
 		return (1);
