@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 01:59:41 by haekang           #+#    #+#             */
-/*   Updated: 2023/08/31 02:31:30 by haekang          ###   ########.fr       */
+/*   Updated: 2023/09/04 21:22:18 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,44 @@
 # include <pthread.h>
 # include <sys/errno.h>
 
-int	ft_atoi(const char *str);
+typedef struct s_data
+{
+	int				num_of_philo;
+	uint64_t		time_to_die;
+	uint64_t		time_to_eat;
+	uint64_t		time_to_sleep;
+	uint64_t		start_time;
+	int				philo_must_eat;
+	int				finished_ph;
+	int				philo_die;
+	pthread_mutex_t	*forks;
+	pthread_mutex_t	print;
+}		t_data;
+
+typedef struct s_philo
+{
+	t_data				*data;
+	pthread_t			tid;
+	pthread_t			master_tid;
+	int					id;
+	uint64_t			death_time;
+	pthread_mutex_t		l_fork;
+	pthread_mutex_t		r_fork;
+	int					eat_cnt;
+}		t_philo;
+
+int			ft_atoi(const char *str);
+
+uint64_t	get_time(void);
+
+int			set_data(t_data *data, int ac, char *av[]);
+
+int			init_philo(t_data *data, t_philo **philo);
+
+int			start(t_data *data, t_philo *philo);
+
+void		print_msg(t_philo *philo, char *str);
+
+void		precise_sleep(uint64_t milliseconds);
 
 #endif
