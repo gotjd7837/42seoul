@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 18:56:23 by haekang           #+#    #+#             */
-/*   Updated: 2023/09/04 20:10:44 by haekang          ###   ########.fr       */
+/*   Updated: 2023/09/05 19:57:37 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ int	init_philo(t_data *data, t_philo **philo)
 	{
 		(*philo)[i].data = data;
 		(*philo)[i].id = i;
+		(*philo)[i].die = 0;
 		(*philo)[i].l_fork = data->forks[i];
 		(*philo)[i].r_fork = data->forks[(i + 1) % data->num_of_philo];
+		pthread_mutex_init(&(*philo)[i].ph_lock, NULL);
 		(*philo)[i].eat_cnt = 0;
 		i++;
 	}
