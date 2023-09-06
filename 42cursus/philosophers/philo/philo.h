@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 01:59:41 by haekang           #+#    #+#             */
-/*   Updated: 2023/09/05 19:55:44 by haekang          ###   ########.fr       */
+/*   Updated: 2023/09/07 06:34:31 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ typedef struct s_philo
 	int					id;
 	int					die;
 	uint64_t			death_time;
-	pthread_mutex_t		l_fork;
-	pthread_mutex_t		r_fork;
+	pthread_mutex_t		*l_fork;
+	pthread_mutex_t		*r_fork;
 	pthread_mutex_t		ph_lock;
 	int					eat_cnt;
 }		t_philo;
@@ -52,6 +52,7 @@ typedef struct s_philo
 int			ft_atoi(const char *str);
 
 uint64_t	get_time(void);
+void		ft_usleep(u_int64_t time);
 
 int			set_data(t_data *data, int ac, char *av[]);
 
@@ -61,7 +62,5 @@ int			start(t_data *data, t_philo *philo);
 
 void		print_msg(t_philo *philo, char *str);
 void		print_die_msg(t_philo *philo);
-
-void		precise_sleep(uint64_t milliseconds);
 
 #endif

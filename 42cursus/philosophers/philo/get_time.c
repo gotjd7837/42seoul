@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 19:01:56 by haekang           #+#    #+#             */
-/*   Updated: 2023/09/04 21:17:50 by haekang          ###   ########.fr       */
+/*   Updated: 2023/09/07 03:40:14 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,12 @@ uint64_t	get_time(void)
 	return ((mytime.tv_sec * 1000) + (mytime.tv_usec / 1000));
 }
 
-void	precise_sleep(uint64_t milliseconds)
+void	ft_usleep(u_int64_t time)
 {
-	struct timeval	start;
-	struct timeval	current;
-	uint64_t		elapsed_time;
+	u_int64_t	start;
 
-	elapsed_time = 0;
-	gettimeofday(&start, NULL);
-	while (elapsed_time < milliseconds)
-	{
-		gettimeofday(&current, NULL);
-		elapsed_time = (current.tv_sec - start.tv_sec) * 1000 + \
-						(current.tv_usec - start.tv_usec) / 1000;
-	}
+	start = get_time();
+	while ((get_time() - start) < time)
+		usleep(time / 10);
+	return ;
 }
