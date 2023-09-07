@@ -6,15 +6,15 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 01:59:41 by haekang           #+#    #+#             */
-/*   Updated: 2023/09/07 06:34:31 by haekang          ###   ########.fr       */
+/*   Updated: 2023/09/07 20:57:16 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# include <string.h>
 # include <stdio.h>
+# include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/time.h>
@@ -24,10 +24,10 @@
 typedef struct s_data
 {
 	int				num_of_philo;
-	uint64_t		time_to_die;
-	uint64_t		time_to_eat;
-	uint64_t		time_to_sleep;
-	uint64_t		start_time;
+	u_int64_t		time_to_die;
+	u_int64_t		time_to_eat;
+	u_int64_t		time_to_sleep;
+	u_int64_t		start_time;
 	int				philo_must_eat;
 	int				finished_ph;
 	int				philo_die;
@@ -42,7 +42,7 @@ typedef struct s_philo
 	pthread_t			maid_tid;
 	int					id;
 	int					die;
-	uint64_t			death_time;
+	u_int64_t			death_time;
 	pthread_mutex_t		*l_fork;
 	pthread_mutex_t		*r_fork;
 	pthread_mutex_t		ph_lock;
@@ -51,7 +51,7 @@ typedef struct s_philo
 
 int			ft_atoi(const char *str);
 
-uint64_t	get_time(void);
+u_int64_t	get_time(void);
 void		ft_usleep(u_int64_t time);
 
 int			set_data(t_data *data, int ac, char *av[]);

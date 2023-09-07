@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 18:57:10 by haekang           #+#    #+#             */
-/*   Updated: 2023/09/07 06:38:27 by haekang          ###   ########.fr       */
+/*   Updated: 2023/09/07 20:55:24 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	check_philo(t_data *data, t_philo *philo)
 {
 	int			i;
-	uint64_t	time;
+	long long	time;
 
 	while (data->philo_die == 0)
 	{
@@ -40,7 +40,27 @@ static void	check_philo(t_data *data, t_philo *philo)
 	return ;
 }
 
-static void	start_eat(t_philo *philo)
+// static void	start_eat_r_fork(t_philo *philo)
+// {
+// 	pthread_mutex_lock(philo->r_fork);
+// 	print_msg(philo, "has taken a fork\n");
+// 	pthread_mutex_lock(philo->l_fork);
+// 	print_msg(philo, "has taken a fork\n");
+// 	print_msg(philo, "is eating\n");
+// 	philo->death_time = get_time() + philo->data->time_to_die;
+// 	philo->eat_cnt++;
+// 	if (philo->eat_cnt == philo->data->philo_must_eat)
+// 		philo->data->finished_ph++;
+// 	ft_usleep(philo->data->time_to_eat);
+// 	pthread_mutex_unlock(philo->r_fork);
+// 	pthread_mutex_unlock(philo->l_fork);
+// 	print_msg(philo, "is sleeping\n");
+// 	ft_usleep(philo->data->time_to_sleep);
+// 	print_msg(philo, "is thinking\n");
+// 	// ft_usleep(3);
+// }
+
+static void	start_eat_l_fork(t_philo *philo)
 {
 	pthread_mutex_lock(philo->l_fork);
 	print_msg(philo, "has taken a fork\n");
@@ -57,6 +77,7 @@ static void	start_eat(t_philo *philo)
 	print_msg(philo, "is sleeping\n");
 	ft_usleep(philo->data->time_to_sleep);
 	print_msg(philo, "is thinking\n");
+	// ft_usleep(3);
 }
 
 static void	*ph_trd(void *philo_pointer)
@@ -73,10 +94,19 @@ static void	*ph_trd(void *philo_pointer)
 		return (NULL);
 	}
 	// if ((philo->id + 1) % 2 == 0)
-	// 	ft_usleep(philo->data->time_to_eat);
-	//데드락 해결방법 이게 진짜 맞나 ?
+	// {
+	// 	while (philo->data->philo_die == 0)
+	// 		start_eat_l_fork(philo);
+	// }
+	// else if ((philo->id + 1) % 2 == 1)
+	// {
+	// 	while (philo->data->philo_die == 0)
+	// 		start_eat_r_fork(philo);
+	// }
+	if ((philo->id + 1) % 2 == 0)
+		ft_usleep(philo->data->time_to_eat);
 	while (philo->data->philo_die == 0)
-		start_eat(philo);
+		start_eat_l_fork(philo);
 	return (NULL);
 }
 

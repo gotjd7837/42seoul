@@ -6,13 +6,13 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 19:01:56 by haekang           #+#    #+#             */
-/*   Updated: 2023/09/07 03:40:14 by haekang          ###   ########.fr       */
+/*   Updated: 2023/09/07 20:54:51 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-uint64_t	get_time(void)
+u_int64_t	get_time(void)
 {
 	struct timeval	mytime;
 

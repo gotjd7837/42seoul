@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 20:20:41 by haekang           #+#    #+#             */
-/*   Updated: 2023/09/07 05:19:31 by haekang          ###   ########.fr       */
+/*   Updated: 2023/09/07 20:55:05 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_msg(t_philo *philo, char *str)
 {
-	uint64_t	time;
+	u_int64_t	time;
 
 	pthread_mutex_lock(&philo->data->print);
 	if (philo->data->philo_die == 0)
@@ -27,7 +27,7 @@ void	print_msg(t_philo *philo, char *str)
 
 void	print_die_msg(t_philo *philo)
 {
-	uint64_t	time;
+	u_int64_t	time;
 
 	pthread_mutex_lock(&philo->data->print);
 	time = get_time() - philo->data->start_time;
@@ -41,7 +41,7 @@ void	print_die_msg(t_philo *philo)
 // 	pthread_t			tid;
 // 	pthread_t			master_tid;
 // 	int					id;
-// 	uint64_t			death_time;
+// 	u_int64_t			death_time;
 // 	pthread_mutex_t		l_fork;
 // 	pthread_mutex_t		r_fork;
 // 	int					eat_cnt;
