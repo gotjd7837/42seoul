@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 01:59:41 by haekang           #+#    #+#             */
-/*   Updated: 2023/09/07 20:57:16 by haekang          ###   ########.fr       */
+/*   Updated: 2023/09/12 21:05:09 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int			set_data(t_data *data, int ac, char *av[]);
 int			init_philo(t_data *data, t_philo **philo);
 
 int			start(t_data *data, t_philo *philo);
+
+void		start_eat(t_philo *philo);
 
 void		print_msg(t_philo *philo, char *str);
 void		print_die_msg(t_philo *philo);
