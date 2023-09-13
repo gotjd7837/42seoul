@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 20:59:35 by haekang           #+#    #+#             */
-/*   Updated: 2023/09/13 22:32:35 by haekang          ###   ########.fr       */
+/*   Updated: 2023/09/13 22:57:50 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,5 @@ void	start_eat(t_philo *philo)
 	print_msg(philo, "is sleeping\n");
 	ft_usleep(philo->data->time_to_sleep);
 	print_msg(philo, "is thinking\n");
-	usleep(500);
+	usleep(700);
 }
