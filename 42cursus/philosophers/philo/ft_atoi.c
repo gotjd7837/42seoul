@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 02:51:21 by haekang           #+#    #+#             */
-/*   Updated: 2023/08/31 02:30:29 by haekang          ###   ########.fr       */
+/*   Updated: 2023/09/14 20:04:59 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	ft_atoi(const char *str)
 	result = 0;
 	while (*str == ' ' || (*str >= 9 && *str <= 13))
 		str++;
+	if (*str == '0')
+		return (0);
 	if (*str == '-' || *str == '+')
 	{
 		if (*str == '-')

@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 20:20:41 by haekang           #+#    #+#             */
-/*   Updated: 2023/09/07 20:55:05 by haekang          ###   ########.fr       */
+/*   Updated: 2023/09/14 19:48:21 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,14 @@ void	print_msg(t_philo *philo, char *str)
 {
 	u_int64_t	time;
 
+	pthread_mutex_lock(&philo->data->data_lock);
 	pthread_mutex_lock(&philo->data->print);
 	if (philo->data->philo_die == 0)
 	{
 		time = get_time() - philo->data->start_time;
 		printf("%llu %d %s", time, (philo->id + 1), str);
 	}
+	pthread_mutex_unlock(&philo->data->data_lock);
 	pthread_mutex_unlock(&philo->data->print);
 }
 

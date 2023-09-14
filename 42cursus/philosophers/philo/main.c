@@ -6,14 +6,38 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 01:28:26 by haekang           #+#    #+#             */
-/*   Updated: 2023/09/05 15:53:35 by haekang          ###   ########.fr       */
+/*   Updated: 2023/09/14 21:20:46 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+void	leak()
+{
+	system("leaks --list -- philo");
+}
+
+int	free_data(t_data *data, t_philo **philo)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->num_of_philo)
+	{
+		pthread_mutex_destroy(&data->forks[i]);
+		i++;
+	}
+	pthread_mutex_destroy(&data->print);
+	pthread_mutex_destroy(&data->data_lock);
+	free(data->forks);
+	if ()
+	return (1);
+}
+
+
 int	main(int ac, char *av[])
 {
+	atexit(leak);
 	t_data	data;
 	t_philo	*philo;
 
@@ -26,6 +50,7 @@ int	main(int ac, char *av[])
 		return (1);
 	if (start(&data, philo))
 		return (1);
+	// free_ph(&data, philo);
 	return (0);
 }
 

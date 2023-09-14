@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 01:59:41 by haekang           #+#    #+#             */
-/*   Updated: 2023/09/12 21:05:09 by haekang          ###   ########.fr       */
+/*   Updated: 2023/09/14 18:01:24 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ typedef struct s_data
 	int				philo_die;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print;
+	pthread_mutex_t	data_lock;
 }		t_data;
 
 typedef struct s_philo
 {
 	t_data				*data;
 	pthread_t			tid;
-	pthread_t			maid_tid;
 	int					id;
 	int					die;
 	u_int64_t			death_time;

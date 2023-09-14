@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 20:59:35 by haekang           #+#    #+#             */
-/*   Updated: 2023/09/13 22:57:50 by haekang          ###   ########.fr       */
+/*   Updated: 2023/09/14 19:10:26 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,16 @@ void	start_eat(t_philo *philo)
 {
 	get_fork(philo);
 	print_msg(philo, "is eating\n");
+	pthread_mutex_lock(&philo->ph_lock);
 	philo->death_time = get_time() + philo->data->time_to_die;
+	pthread_mutex_unlock(&philo->ph_lock);
 	philo->eat_cnt++;
 	if (philo->eat_cnt == philo->data->philo_must_eat)
+	{
+		pthread_mutex_lock(&philo->data->data_lock);
 		philo->data->finished_ph++;
+		pthread_mutex_unlock(&philo->data->data_lock);
+	}
 	ft_usleep(philo->data->time_to_eat);
 	put_fork(philo);
 	print_msg(philo, "is sleeping\n");
