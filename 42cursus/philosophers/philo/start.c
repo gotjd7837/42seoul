@@ -6,44 +6,27 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 18:57:10 by haekang           #+#    #+#             */
-/*   Updated: 2023/09/14 20:34:44 by haekang          ###   ########.fr       */
+/*   Updated: 2023/09/16 19:19:35 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	check_philo(t_data *data, t_philo *philo)
+static void	one_philo(t_philo *philo)
 {
-	int			i;
-	long long	time;
-
-	while (data->philo_die == 0)
+	pthread_mutex_lock(philo->l_fork);
+	print_msg(philo, "has taken a fork\n");
+	while (1)
 	{
-		pthread_mutex_lock(&data->data_lock);
-		if (data->finished_ph == data->num_of_philo)
+		pthread_mutex_lock(&philo->data->data_lock);
+		if (philo->data->philo_die == 1)
 		{
-			data->philo_die = 1;
-			pthread_mutex_unlock(&data->data_lock);
+			pthread_mutex_unlock(&philo->data->data_lock);
 			break ;
 		}
-		pthread_mutex_unlock(&data->data_lock);
-		i = -1;
-		while (++i < data->num_of_philo)
-		{
-			pthread_mutex_lock(&philo[i].ph_lock);
-			time = get_time();
-			if (philo[i].death_time - time <= 0)
-			{
-				pthread_mutex_lock(&data->data_lock);
-				data->philo_die = 1;
-				pthread_mutex_unlock(&data->data_lock);
-				print_die_msg(&philo[i]);
-				pthread_mutex_unlock(&philo[i].ph_lock);
-				break ;
-			}
-			pthread_mutex_unlock(&philo[i].ph_lock);
-		}
+		pthread_mutex_unlock(&philo->data->data_lock);
 	}
+	pthread_mutex_unlock(philo->l_fork);
 	return ;
 }
 
@@ -57,17 +40,7 @@ static void	*ph_trd(void *philo_pointer)
 	pthread_mutex_unlock(&philo->ph_lock);
 	if (philo->data->num_of_philo == 1)
 	{
-		print_msg(philo, "has taken a fork\n");
-		while (1)
-		{
-			pthread_mutex_lock(&philo->data->data_lock);
-			if (philo->data->philo_die == 1)
-			{
-				pthread_mutex_unlock(&philo->data->data_lock);
-				break ;
-			}
-			pthread_mutex_unlock(&philo->data->data_lock);
-		}
+		one_philo(philo);
 		return (NULL);
 	}
 	if ((philo->id + 1) % 2 == 0)
@@ -95,16 +68,10 @@ int	start(t_data *data, t_philo *philo)
 	while (i < data->num_of_philo)
 	{
 		if (pthread_create(&(philo[i].tid), NULL, ph_trd, (void *)&(philo[i])))
-			return (1);
+			return (error("thread create error"));
 		i++;
 	}
-	check_philo(data, philo);
-	i = 0;
-	while (i < data->num_of_philo)
-	{
-		if (pthread_join(philo[i].tid, NULL))
-			return (1);
-		i++;
-	}
+	if (main_trd(data, philo))
+		return (1);
 	return (0);
 }
