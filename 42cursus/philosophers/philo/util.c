@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 02:51:21 by haekang           #+#    #+#             */
-/*   Updated: 2023/09/16 17:57:51 by haekang          ###   ########.fr       */
+/*   Updated: 2023/09/20 17:21:29 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ u_int64_t	get_time(void)
 	return ((mytime.tv_sec * 1000) + (mytime.tv_usec / 1000));
 }
 
-void	ft_usleep(u_int64_t time_ms)
+void	ft_usleep(u_int64_t time_ms, t_philo *philo)
 {
 	u_int64_t	start;
 
 	start = get_time();
 	while ((get_time() - start) < time_ms)
-		usleep(time_ms / 10);
+		usleep(philo->data->num_of_philo * 5);
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 01:59:41 by haekang           #+#    #+#             */
-/*   Updated: 2023/09/16 16:08:57 by haekang          ###   ########.fr       */
+/*   Updated: 2023/09/20 16:56:42 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,7 @@ typedef struct s_philo
 }		t_philo;
 
 int			ft_atoi(const char *str);
-
 u_int64_t	get_time(void);
-void		ft_usleep(u_int64_t time);
 
 int			set_data(t_data *data, int ac, char *av[]);
 
@@ -64,6 +62,8 @@ void		start_eat(t_philo *philo);
 
 void		print_msg(t_philo *philo, char *str);
 void		print_die_msg(t_philo *philo);
+
+void		ft_usleep(u_int64_t time_ms, t_philo *philo);
 
 int			main_trd(t_data *data, t_philo *philo);
 int			error(char *str);

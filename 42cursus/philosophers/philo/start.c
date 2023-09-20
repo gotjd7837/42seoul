@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 18:57:10 by haekang           #+#    #+#             */
-/*   Updated: 2023/09/16 19:19:35 by haekang          ###   ########.fr       */
+/*   Updated: 2023/09/20 16:51:41 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	*ph_trd(void *philo_pointer)
 		return (NULL);
 	}
 	if ((philo->id + 1) % 2 == 0)
-		ft_usleep(philo->data->time_to_eat);
+		ft_usleep(philo->data->time_to_eat, philo);
 	while (1)
 	{
 		pthread_mutex_lock(&philo->data->data_lock);

@@ -6,7 +6,7 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 20:59:35 by haekang           #+#    #+#             */
-/*   Updated: 2023/09/16 19:01:04 by haekang          ###   ########.fr       */
+/*   Updated: 2023/09/20 17:38:01 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ void	start_eat(t_philo *philo)
 		philo->data->finished_ph++;
 		pthread_mutex_unlock(&philo->data->data_lock);
 	}
-	ft_usleep(philo->data->time_to_eat);
+	ft_usleep(philo->data->time_to_eat, philo);
 	put_fork(philo);
 	print_msg(philo, "is sleeping\n");
-	ft_usleep(philo->data->time_to_sleep);
+	ft_usleep(philo->data->time_to_sleep, philo);
 	print_msg(philo, "is thinking\n");
-	usleep(700);
+	usleep(100);
 }
