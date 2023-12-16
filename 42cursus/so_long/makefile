@@ -24,18 +24,18 @@ NAME=so_long
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-	make -C $(LIBFT_DIR)
-	make -C $(PRINTF_DIR)
-	make -C $(MLX_DIR)
-	$(CC) $(CFLAGS) $(MFLAGS) $(LIBFT_DIR)/libft.a $(PRINTF_DIR)/libftprintf.a $(MLX_DIR)/libmlx.a -o $@ $^
+	@make -C $(LIBFT_DIR)
+	@make -C $(PRINTF_DIR)
+	@make -C $(MLX_DIR)
+	@$(CC) $(CFLAGS) $(MFLAGS) $(LIBFT_DIR)/libft.a $(PRINTF_DIR)/libftprintf.a $(MLX_DIR)/libmlx.a -o $@ $^
 
 %.o : %.c
-	$(CC) $(CFLAGS) -c -o $@ $^ -I$(HEADER)
+	@$(CC) $(CFLAGS) -c -o $@ $^ -I$(HEADER)
 
 clean :
 	make -C $(LIBFT_DIR) clean
 	make -C $(PRINTF_DIR) clean
-	rm -f $(MLX_DIR)/*.o
+	make -C $(MLX_DIR) clean
 	rm -f $(OBJS)
 
 fclean :
