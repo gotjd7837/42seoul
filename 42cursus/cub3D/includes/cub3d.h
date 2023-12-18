@@ -6,13 +6,15 @@
 /*   By: haekang <haekang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 15:53:12 by haekang           #+#    #+#             */
-/*   Updated: 2023/12/16 17:49:11 by haekang          ###   ########.fr       */
+/*   Updated: 2023/12/18 17:14:47 by haekang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include <unistd.h>
+# include <fcntl.h>
 # include "mlx/mlx.h"
 
 /*
@@ -90,5 +92,23 @@
 # define M_CLK_M 2
 # define M_SCR_U 4
 # define M_SCR_D 5
+
+
+
+typedef struct s_map
+{
+	int		width;
+	int		height;
+	char	**map;
+}	t_map;
+
+//cub_parse
+t_map	*cub_parse(char *file_name);
+char	*cub_parse_make_map_path(char *file_name);
+
+//cub_util
+void	cub_print_err(char *str);
+int	    cub_strlen(char *str);
+char	*cub_strjoin(char *s1, char *s2);
 
 #endif
