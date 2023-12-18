@@ -6,12 +6,13 @@
 #    By: haekang <haekang@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/12 19:47:46 by haekang           #+#    #+#              #
-#    Updated: 2023/12/16 16:11:23 by haekang          ###   ########.fr        #
+#    Updated: 2023/12/16 18:00:18 by haekang          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
+MFLAGS=-framework OpenGL -framework Appkit
 NAME = cub3D
 HEADERS = ./includes
 MLX_DIR = ./includes/mlx
@@ -21,14 +22,12 @@ OBJS = $(SRCS:%.c=%.o)
 all: $(NAME)
 
 $(NAME): $(OBJS) $(HEADERS)
-	make -C $(MLX_DIR)
-	$(CC) $(OBJS) $(MLX_DIR)/libmlx.a -o $(NAME)
+	$(CC) $(MFLAGS) $(OBJS) $(MLX_DIR)/libmlx.a -o $(NAME)
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	make -C $(MLX_DIR) clean
 	rm -Rf $(OBJS)
 
 fclean: clean
