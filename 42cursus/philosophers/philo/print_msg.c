@@ -21,7 +21,7 @@ void	print_msg(t_philo *philo, char *str)
 	if (philo->data->philo_die == 0)
 	{
 		time = get_time() - philo->data->start_time;
-		printf("%llu %d %s", time, (philo->id + 1), str);
+		printf("%lu %d %s", time, (philo->id + 1), str);
 	}
 	pthread_mutex_unlock(&philo->data->data_lock);
 	pthread_mutex_unlock(&philo->data->print);
@@ -33,6 +33,6 @@ void	print_die_msg(t_philo *philo)
 
 	pthread_mutex_lock(&philo->data->print);
 	time = get_time() - philo->data->start_time;
-	printf("%llu %d %s", time, (philo->id + 1), "died\n");
+	printf("%lu %d %s", time, (philo->id + 1), "died\n");
 	pthread_mutex_unlock(&philo->data->print);
 }
