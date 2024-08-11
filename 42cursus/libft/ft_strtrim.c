@@ -27,7 +27,7 @@ static size_t	idx_end(char const *s1, char const *set)
 	size_t	end;
 
 	end = ft_strlen(s1) - 1;
-	while (end >= 0 && ft_strchr(set, s1[end]))
+	while (ft_strchr(set, s1[end]))
 		end--;
 	return (end);
 }
